@@ -11,10 +11,10 @@ package Interfaz;
  */
 public class main {
     public static void main(String[]args){
-        Inicio p1=new Inicio();
-       p1.setVisible(true);
+        Inicio inicio=new Inicio();
+       inicio.setVisible(true);
         esperar(3);
-        p1.setVisible(false);
+        inicio.setVisible(false);
         Traductor t1=new Traductor();
         t1.setVisible(true);
          
