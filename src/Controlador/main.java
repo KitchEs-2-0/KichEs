@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interfaz;
+package Controlador;
+
+import Interfaz.Inicio;
+import Interfaz.Traductor;
 
 /**
  *
@@ -23,7 +26,6 @@ public class main {
         try {
             Thread.sleep(segundos * 1000);
          } catch (Exception e) {
-//            System.out.println(e);
          }
     } 
 }

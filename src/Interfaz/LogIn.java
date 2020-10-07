@@ -5,9 +5,16 @@
  */
 package Interfaz;
 
+import Controlador.ConexionBADA;
+import Modelo.CRegistro;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -50,7 +57,7 @@ public class LogIn extends javax.swing.JFrame {
         jPanel1 = new FondoPanel();
         btnatras = new javax.swing.JButton();
         txtUsuario = new javax.swing.JTextField();
-        jContraseña = new javax.swing.JPasswordField();
+        txtpassword = new javax.swing.JPasswordField();
         btnIniciar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -70,7 +77,7 @@ public class LogIn extends javax.swing.JFrame {
         txtUsuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtUsuario.setToolTipText("Usuario");
 
-        jContraseña.setToolTipText("Contraseña");
+        txtpassword.setToolTipText("Contraseña");
 
         btnIniciar.setText("Ingresar");
         btnIniciar.addActionListener(new java.awt.event.ActionListener() {
@@ -101,7 +108,7 @@ public class LogIn extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(63, 63, 63)
@@ -136,7 +143,7 @@ public class LogIn extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -165,13 +172,48 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_btnatrasActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-        // TODO add your handling code here:
+        ValidarCredenciales();
+        this.setVisible(false);
+        TraductorlogIn a=new TraductorlogIn();
+        a.setVisible(true);
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
+    CRegistro login=new CRegistro();
+        public void ValidarCredenciales(){
+
+   
+        try {
+            login.setUsuario(txtUsuario.getText());
+            login.setPassword(String.valueOf(txtpassword.getPassword()));
+            
+            
+            if(consultar()==true){
+                Inicio inicio=new Inicio();
+                inicio.setVisible(true);
+                this.dispose();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                    
+                
+    }
+    
+    public boolean consultar() throws SQLException{
+    ConexionBADA conecta=new ConexionBADA();
+    String sql="SELECT * FROM registro WHERE usuario ='"+login.getUsuario()+"' AND password=('"+login.getPassword()+"')";
+    ResultSet rs=conecta.query(sql);
+    if(rs.next()==true){
+          return true;      
+        }
+        JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecta");
+        txtpassword.setText("");
+        return false;
+    }
     /**
      * @param args the command line arguments
      */
@@ -211,11 +253,11 @@ public class LogIn extends javax.swing.JFrame {
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnRegistrarse;
     private javax.swing.JButton btnatras;
-    private javax.swing.JPasswordField jContraseña;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtUsuario;
+    private javax.swing.JPasswordField txtpassword;
     // End of variables declaration//GEN-END:variables
 }

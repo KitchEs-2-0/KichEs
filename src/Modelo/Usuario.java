@@ -9,23 +9,6 @@ public class Usuario {
     private String password;
     private String password1;
 
-    public Usuario(String nombre, String apellido, String edad, String Usuario, String password, String password1) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.edad = edad;
-        this.Usuario = Usuario;
-        this.password = password;
-        this.password1 = password1;
-    }
-
-    public String getPassword1() {
-        return password1;
-    }
-
-    public void setPassword1(String password1) {
-        this.password1 = password1;
-    }
-
     public String getNombre() {
         return nombre;
     }
@@ -65,6 +48,16 @@ public class Usuario {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getPassword1() {
+        return password1;
+    }
+
+    public void setPassword1(String password1) {
+        this.password1 = password1;
+    }
+    
+
     
     
 }
