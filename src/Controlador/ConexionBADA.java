@@ -13,7 +13,7 @@ public class ConexionBADA {
     private Statement st;
     private ResultSet rs;
     
-    private String CadenaConexion="jdbc:mysql://localhost:3306/Kiches?zeroDateTimeBehavior=convertToNull";
+    private String CadenaConexion="jdbc:mysql://localhost:3306/kiches"+"?useTimezone=true&serverTimezone=UTC";
     private String usuarioPo="root";
     private String contrasena="";
     

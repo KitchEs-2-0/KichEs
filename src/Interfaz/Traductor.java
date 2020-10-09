@@ -9,6 +9,10 @@ import Controlador.ConexionBADA;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.Normalizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -128,7 +132,7 @@ class FondoPanel extends JPanel{
                                 .addComponent(txtPalabraIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 46, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(btnIniciarSesion)
                                 .addComponent(btnJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -146,7 +150,7 @@ class FondoPanel extends JPanel{
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrarse)
                     .addComponent(btnIniciarSesion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPalabraIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -168,11 +172,17 @@ class FondoPanel extends JPanel{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(151, 151, 151)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -199,13 +209,26 @@ class FondoPanel extends JPanel{
 
     private void btnTraduccirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraduccirActionPerformed
         String camb=txtPalabraIngreso.getText().toLowerCase();
-        String sql="SELECT palabra2 From palabra2 WHERE palabra2='"+camb+"'";
+        String nw=cleanString(camb);
+        String sql="SELECT palabra2 From palabra2 WHERE palabra2='"+nw+"'";
         ResultSet rs=conecto.query(sql);
-        String c=String.valueOf(rs).toString();
-        lblTraduccion.setText(c);
         
+        try {
+            while (rs.next()){
+               lblTraduccion.setText(rs.toString());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Traductor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        String c=String.valueOf(rs).toString();
+//        lblTraduccion.setText(c);
     }//GEN-LAST:event_btnTraduccirActionPerformed
 
+    public static String cleanString(String texto) {
+        texto = Normalizer.normalize(texto, Normalizer.Form.NFD);
+        texto = texto.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+        return texto;
+    }
     /**
      * @param args the command line arguments
      */
