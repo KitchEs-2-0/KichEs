@@ -184,34 +184,30 @@ public class LogIn extends javax.swing.JFrame {
 
     CRegistro login=new CRegistro();
         public void ValidarCredenciales(){
-
-   
-        try {
             login.setUsuario(txtUsuario.getText());
             login.setPassword(String.valueOf(txtpassword.getPassword()));
-            
-            
             if(consultar()==true){
                 Inicio inicio=new Inicio();
                 inicio.setVisible(true);
                 this.dispose();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                    
+            }                    
                 
     }
     
-    public boolean consultar() throws SQLException{
-    ConexionBADA conecta=new ConexionBADA();
-    String sql="SELECT * FROM registro WHERE usuario ='"+login.getUsuario()+"' AND password=('"+login.getPassword()+"')";
-    ResultSet rs=conecta.query(sql);
-    if(rs.next()==true){
-          return true;      
+    public boolean consultar() {
+        try {
+            ConexionBADA conecta=new ConexionBADA();
+            String sql="SELECT * FROM login WHERE usuario ='"+login.getUsuario()+"' AND password=('"+login.getPassword()+"')";
+            ResultSet rs=conecta.query(sql);
+            if(rs.next()==true){      
+                return true;
+            }
+            JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecta");
+            txtpassword.setText("");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecta");
-        txtpassword.setText("");
         return false;
     }
     /**

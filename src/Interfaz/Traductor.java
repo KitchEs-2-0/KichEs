@@ -5,8 +5,10 @@
  */
 package Interfaz;
 
+import Controlador.ConexionBADA;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.sql.ResultSet;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -15,7 +17,7 @@ import javax.swing.JPanel;
  * @author ASUS
  */
 public class Traductor extends javax.swing.JFrame {
-
+    ConexionBADA conecto= new ConexionBADA();
     /**
      * Creates new form Traductor
      */
@@ -37,6 +39,7 @@ class FondoPanel extends JPanel{
             super.paint(g);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,9 +55,9 @@ class FondoPanel extends JPanel{
         btnJuego = new javax.swing.JButton();
         btnIniciarSesion = new javax.swing.JButton();
         btnRegistrarse = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        txtPalabraIngreso = new javax.swing.JTextField();
+        lblHistorial = new javax.swing.JLabel();
+        lblTraduccion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -70,6 +73,11 @@ class FondoPanel extends JPanel{
         });
 
         btnTraduccir.setText("TRADUCIR");
+        btnTraduccir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTraduccirActionPerformed(evt);
+            }
+        });
 
         btnJuego.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,12 +99,12 @@ class FondoPanel extends JPanel{
             }
         });
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField2.setToolTipText("Traduccion");
+        txtPalabraIngreso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPalabraIngreso.setToolTipText("Traduccion");
 
-        jLabel1.setText("Historial");
+        lblHistorial.setText("Historial");
 
-        jLabel2.setText("TRADUCCION");
+        lblTraduccion.setText("TRADUCCION");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -117,7 +125,7 @@ class FondoPanel extends JPanel{
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtPalabraIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 46, Short.MAX_VALUE))
@@ -127,8 +135,8 @@ class FondoPanel extends JPanel{
                         .addGap(53, 53, 53))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblTraduccion, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -140,7 +148,7 @@ class FondoPanel extends JPanel{
                     .addComponent(btnIniciarSesion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPalabraIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(btnTraduccir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -150,9 +158,9 @@ class FondoPanel extends JPanel{
                         .addComponent(btnJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTraduccion, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(22, 22, 22))
         );
 
@@ -188,6 +196,15 @@ class FondoPanel extends JPanel{
         LogIn l1=new LogIn();
         l1.setVisible(true);
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
+
+    private void btnTraduccirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraduccirActionPerformed
+        String camb=txtPalabraIngreso.getText().toLowerCase();
+        String sql="SELECT palabra2 From palabra2 WHERE palabra2='"+camb+"'";
+        ResultSet rs=conecto.query(sql);
+        String c=String.valueOf(rs).toString();
+        lblTraduccion.setText(c);
+        
+    }//GEN-LAST:event_btnTraduccirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,9 +247,9 @@ class FondoPanel extends JPanel{
     private javax.swing.JButton btnRegistrarse;
     private javax.swing.JToggleButton btnTraduccir;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lblHistorial;
+    private javax.swing.JLabel lblTraduccion;
+    private javax.swing.JTextField txtPalabraIngreso;
     // End of variables declaration//GEN-END:variables
 }

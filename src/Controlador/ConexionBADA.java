@@ -13,7 +13,7 @@ public class ConexionBADA {
     private Statement st;
     private ResultSet rs;
     
-    private String CadenaConexion="jdbc:mysql://localhost:3306/kitches"+"?useTimezone=true&serverTimezone=UTC";
+    private String CadenaConexion="jdbc:mysql://localhost:3306/Kiches?zeroDateTimeBehavior=convertToNull";
     private String usuarioPo="root";
     private String contrasena="";
     
@@ -30,6 +30,7 @@ public class ConexionBADA {
            con=DriverManager.getConnection(CadenaConexion,usuarioPo, contrasena);
        } catch (SQLException ex) {
             Logger.getLogger(ConexionBADA.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("error coneccion");
         }
     }
     
