@@ -173,9 +173,6 @@ public class LogIn extends javax.swing.JFrame {
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         ValidarCredenciales();
-        this.setVisible(false);
-        TraductorlogIn a=new TraductorlogIn();
-        a.setVisible(true);
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
@@ -187,9 +184,12 @@ public class LogIn extends javax.swing.JFrame {
             login.setUsuario(txtUsuario.getText());
             login.setPassword(String.valueOf(txtpassword.getPassword()));
             if(consultar()==true){
-                Inicio inicio=new Inicio();
-                inicio.setVisible(true);
+                TraductorlogIn tl=new TraductorlogIn();
+                tl.setVisible(true);
                 this.dispose();
+            }else{
+                 JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecta");
+                txtpassword.setText("");
             }                    
                 
     }
@@ -197,13 +197,11 @@ public class LogIn extends javax.swing.JFrame {
     public boolean consultar() {
         try {
             ConexionBADA conecta=new ConexionBADA();
-            String sql="SELECT * FROM login WHERE usuario ='"+login.getUsuario()+"' AND password=('"+login.getPassword()+"')";
+            String sql="SELECT usuario,password FROM persona WHERE usuario ='"+login.getUsuario()+"' AND password=('"+login.getPassword()+"')";
             ResultSet rs=conecta.query(sql);
             if(rs.next()==true){      
                 return true;
             }
-            JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecta");
-            txtpassword.setText("");
             
         } catch (SQLException ex) {
             Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);

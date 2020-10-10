@@ -72,7 +72,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="contra" min="-2" pref="267" max="-2" attributes="0"/>
                                       <Component id="txtUsuario" min="-2" pref="267" max="-2" attributes="0"/>
-                                      <Component id="jTextField4" min="-2" pref="76" max="-2" attributes="0"/>
+                                      <Component id="txtedad" min="-2" pref="76" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -126,7 +126,7 @@
                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jTextField4" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtedad" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -223,7 +223,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUsuarioActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField4">
+        <Component class="javax.swing.JTextField" name="txtedad">
         </Component>
         <Component class="javax.swing.JTextField" name="txtApellido">
         </Component>
@@ -256,6 +256,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Continuar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnregistrActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

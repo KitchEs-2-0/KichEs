@@ -5,9 +5,16 @@
  */
 package Interfaz;
 
+import Controlador.ConexionBADA;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -15,10 +22,8 @@ import javax.swing.JPanel;
  * @author ASUS
  */
 public class Registro extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Registro
-     */
+    ConexionBADA conecta=new ConexionBADA();
+   
     FondoPanel ñ1=new FondoPanel();
     public Registro() {
         this.setContentPane(ñ1);
@@ -57,7 +62,7 @@ public class Registro extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         txtUsuario = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        txtedad = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
         contra = new javax.swing.JPasswordField();
         jLabel7 = new javax.swing.JLabel();
@@ -118,6 +123,11 @@ public class Registro extends javax.swing.JFrame {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/iconblanco.png"))); // NOI18N
 
         btnregistr.setText("Continuar");
+        btnregistr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnregistrActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -148,7 +158,7 @@ public class Registro extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(contra, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtedad, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -187,7 +197,7 @@ public class Registro extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -243,6 +253,99 @@ public class Registro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_confirmaContraActionPerformed
 
+    private void btnregistrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrActionPerformed
+        if ( txtUsuario.getText().equals("")||contra.getText().equals("")||txtNombre.getText().equals("")||txtApellido.getText().equals("")|| txtedad.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Necesita llenar todas las casillas para poder registrarse");
+        }else{
+            if(validarusuario()==true){
+                try {
+                    PreparedStatement ps=conecta.getCon().prepareStatement("INSERT INTO persona(usuario,password,Nombre,apellido,edad) VALUES(?,?,?,?,?)");
+                    ps.setString(1,txtUsuario.getText());
+                    ps.setString(2,String.valueOf(contra.getPassword()));
+                    ps.setString(3,txtNombre.getText());
+                    ps.setString(4,txtApellido.getText());
+                    ps.setString(5,txtedad.getText());
+                    if (ConfirmarContra()==true) {
+                        ps.executeUpdate();
+                        limpiar();
+                        JOptionPane.showMessageDialog(null, "Datos gurdados");
+                        TraductorlogIn tl=new TraductorlogIn();
+                        tl.setVisible(true);
+                        mostrarUsuarioR();
+                        this.dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden");
+                        contra.setText("");
+                        confirmaContra.setText("");
+                    }
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }else{
+                JOptionPane.showMessageDialog(null, "El usuario ya existe"
+                        + "\nIngrese otro usuario");
+            }
+        }
+            
+    }                                          
+
+    public boolean validarusuario(){
+        String sql="SELECT usuario FROM persona WHERE usuario ='"+txtUsuario.getText()+"'";
+        ResultSet rs=conecta.query(sql);
+    try {
+        if(rs.next()==true){
+            return false;
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return true;
+    }
+    
+    public void limpiar(){
+        txtUsuario.setText("");
+        contra.setText("");
+        confirmaContra.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtedad.setText("");
+    }
+    
+    public boolean ConfirmarContra(){
+        String contra1=null;
+        String confirmacontra=null;
+        contra1=String.valueOf(contra.getPassword());
+        confirmacontra=String.valueOf(confirmaContra.getPassword());
+        if (contra1.equals(confirmacontra)) {
+            return true;
+        }
+        return false;
+    }
+    
+    public ResultSet mostrarUsuarioR(){
+        
+        String sql="SELECT Nombre,apellido FROM persona WHERE usuario='"+txtUsuario.getText()+"'";
+        ResultSet rs=conecta.query(sql);
+        try {
+            while(rs.next()==true){
+                String[] a = new String[2];
+                a[0]=rs.getString(1);
+                a[1]=rs.getString(2);
+                
+                System.out.println(a);    
+                
+            }
+                
+            } catch (SQLException ex) {
+            Logger.getLogger(TraductorlogIn.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        return rs;
+    
+    }//GEN-LAST:event_btnregistrActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -292,9 +395,9 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtUsuario;
+    private javax.swing.JTextField txtedad;
     // End of variables declaration//GEN-END:variables
 }
