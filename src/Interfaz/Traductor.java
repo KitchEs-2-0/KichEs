@@ -5,16 +5,18 @@
  */
 package Interfaz;
 
+import Consultas.ConsultasSQL;
 import Controlador.ConexionBADA;
+import Modelo.Usuario;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.Normalizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,9 +24,9 @@ import javax.swing.JPanel;
  */
 public class Traductor extends javax.swing.JFrame {
     ConexionBADA conecto= new ConexionBADA();
-    /**
-     * Creates new form Traductor
-     */
+    Usuario usuario=new Usuario();
+    DefaultTableModel dt;
+    
     FondoPanel ab=new FondoPanel();
     public Traductor() {
         this.setContentPane(ab);
@@ -54,14 +56,16 @@ class FondoPanel extends JPanel{
     private void initComponents() {
 
         jPanel1 = new FondoPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbxelegiridima = new javax.swing.JComboBox<>();
         btnTraduccir = new javax.swing.JToggleButton();
         btnJuego = new javax.swing.JButton();
         btnIniciarSesion = new javax.swing.JButton();
         btnRegistrarse = new javax.swing.JButton();
         txtPalabraIngreso = new javax.swing.JTextField();
-        lblHistorial = new javax.swing.JLabel();
         lblTraduccion = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablahistorial = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -69,10 +73,10 @@ class FondoPanel extends JPanel{
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 628));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Traduccion", "Español-kichwa", "Kichwa-Español" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cbxelegiridima.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Traduccion", "Español-kichwa", "Kichwa-Español" }));
+        cbxelegiridima.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cbxelegiridimaActionPerformed(evt);
             }
         });
 
@@ -106,9 +110,23 @@ class FondoPanel extends JPanel{
         txtPalabraIngreso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtPalabraIngreso.setToolTipText("Traduccion");
 
-        lblHistorial.setText("Historial");
-
         lblTraduccion.setText("TRADUCCION");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("HISTORIAL");
+
+        tablahistorial.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "N°", "Palabra", "Traduccion"
+            }
+        ));
+        jScrollPane2.setViewportView(tablahistorial);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -126,22 +144,29 @@ class FondoPanel extends JPanel{
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(152, 152, 152)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnIniciarSesion)
+                        .addGap(61, 61, 61))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtPalabraIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnIniciarSesion)
-                                .addComponent(btnJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(53, 53, 53))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTraduccion, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cbxelegiridima, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblTraduccion, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(btnJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(387, 387, 387)
+                        .addComponent(jLabel1)))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,47 +175,42 @@ class FondoPanel extends JPanel{
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrarse)
                     .addComponent(btnIniciarSesion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPalabraIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxelegiridima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(btnTraduccir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(203, 203, 203)
-                        .addComponent(btnJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(lblTraduccion, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(lblHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(22, 22, 22))
+                .addGap(37, 37, 37)
+                .addComponent(lblTraduccion, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(88, 88, 88))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(151, 151, 151)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 991, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cbxelegiridimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxelegiridimaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_cbxelegiridimaActionPerformed
 
     private void btnJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJuegoActionPerformed
         // TODO add your handling code here:
@@ -209,20 +229,20 @@ class FondoPanel extends JPanel{
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void btnTraduccirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraduccirActionPerformed
-        String camb=txtPalabraIngreso.getText().toLowerCase();
-        String nw=cleanString(camb);
-        String sql="SELECT palabra2 From palabra2 WHERE palabra2='"+nw+"'";
-        ResultSet rs=conecto.query(sql);
-        
-        try {
-            while (rs.next()){
-               lblTraduccion.setText(rs.toString());
+        if (txtPalabraIngreso.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese una palabra");
+        }else{
+            if (comboBox()==0) {
+            JOptionPane.showMessageDialog(null, "Elige los idimas al que desea traducir");
+            } else {
+                if (comboBox()==1) {
+                    Es_Ki();
+                } else {
+                    Ki_Es();
+                }
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(Traductor.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        String c=String.valueOf(rs).toString();
-//        lblTraduccion.setText(c);
+        
     }//GEN-LAST:event_btnTraduccirActionPerformed
 
     public static String cleanString(String texto) {
@@ -270,10 +290,96 @@ class FondoPanel extends JPanel{
     private javax.swing.JButton btnJuego;
     private javax.swing.JButton btnRegistrarse;
     private javax.swing.JToggleButton btnTraduccir;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbxelegiridima;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblHistorial;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblTraduccion;
+    private javax.swing.JTable tablahistorial;
     private javax.swing.JTextField txtPalabraIngreso;
     // End of variables declaration//GEN-END:variables
+
+    public int comboBox(){
+        int num=cbxelegiridima.getSelectedIndex();
+        if (num==0) {
+            return 0;
+        } else {
+            if (num==1) {
+                return 1;
+            } else {
+                return 2;
+            }
+        }
+    }
+    
+    
+    public void Es_Ki(){
+        String camb=txtPalabraIngreso.getText().toLowerCase();
+        String nw=cleanString(camb);
+        String cnw=nw.replace("ñ","~n");//esto aun no funciona 
+        System.out.println(cnw);
+        String codigo="SELECT codpalabra2 From palabra1 WHERE palabra1p='"+cnw+"'";
+        
+            ResultSet rsc,rsp;
+            ConsultasSQL con = new ConsultasSQL(conecto.getCon(), codigo);
+            
+            if(con.getError()==null){
+                rsc=con.getResultado();
+                try {
+                    rsc.next();
+                    String coigo2 = rsc.getString("codpalabra2");
+                    String palabra="SELECT palabra2p FROM palabra2 WHERE codPalabra2='"+coigo2+"'";
+                    ConsultasSQL pal=new ConsultasSQL(conecto.getCon(), palabra);
+                    rsp=pal.getResultado();
+                    rsp.next();
+                    String palabraesp = rsp.getString("palabra2p");
+                    lblTraduccion.setText(palabraesp);
+                    
+                        dt=(DefaultTableModel)tablahistorial.getModel();
+                        
+                        int num=1;
+                        while (num>0) {
+                        String fila[]={String.valueOf(num),txtPalabraIngreso.getText(),palabraesp};
+                        dt.addRow(fila);
+                        }
+                        num++;//Mandar los resultados a la tabal historial
+                        //No me funciona
+                   rsp.close();
+                    
+                } catch (SQLException ex) {
+                    ex.getMessage();
+                    lblTraduccion.setText(txtPalabraIngreso.getText());
+                }
+                
+               
+            }
+    }
+    
+    public void Ki_Es(){
+        String camb=txtPalabraIngreso.getText().toLowerCase();
+        String nw=cleanString(camb);
+        String cnw=nw.replace("ñ","~n");//esto aun no funciona 
+        System.out.println(cnw);
+        String codigo="SELECT codPalabra2 FROM palabra2 WHERE palabra2p='"+cnw+"'";
+        
+            ResultSet rsc,rsp;
+            ConsultasSQL con = new ConsultasSQL(conecto.getCon(), codigo);
+            
+            if(con.getError()==null){
+                rsc=con.getResultado();
+                try {
+                    rsc.next();
+                    String coigo2 = rsc.getString("codPalabra2");
+                    String palabra="SELECT palabra1p FROM palabra1 WHERE codpalabra2='"+coigo2+"'";
+                    ConsultasSQL pal=new ConsultasSQL(conecto.getCon(), palabra);
+                    rsp=pal.getResultado();
+                    rsp.next();
+                    String palabraesp = rsp.getString("palabra1p");
+                    lblTraduccion.setText(palabraesp);
+                } catch (SQLException ex) {
+                    ex.getMessage();
+                    lblTraduccion.setText(txtPalabraIngreso.getText());
+                }
+            }
+    }
 }

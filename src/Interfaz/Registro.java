@@ -6,6 +6,7 @@
 package Interfaz;
 
 import Controlador.ConexionBADA;
+import Modelo.CPersona;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.sql.PreparedStatement;
@@ -23,7 +24,8 @@ import javax.swing.JPanel;
  */
 public class Registro extends javax.swing.JFrame {
     ConexionBADA conecta=new ConexionBADA();
-   
+    CPersona persona=new CPersona();
+    
     FondoPanel ñ1=new FondoPanel();
     public Registro() {
         this.setContentPane(ñ1);
@@ -254,17 +256,18 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_confirmaContraActionPerformed
 
     private void btnregistrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrActionPerformed
+        enviarDatos();
         if ( txtUsuario.getText().equals("")||contra.getText().equals("")||txtNombre.getText().equals("")||txtApellido.getText().equals("")|| txtedad.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Necesita llenar todas las casillas para poder registrarse");
         }else{
             if(validarusuario()==true){
                 try {
                     PreparedStatement ps=conecta.getCon().prepareStatement("INSERT INTO persona(usuario,password,Nombre,apellido,edad) VALUES(?,?,?,?,?)");
-                    ps.setString(1,txtUsuario.getText());
-                    ps.setString(2,String.valueOf(contra.getPassword()));
-                    ps.setString(3,txtNombre.getText());
-                    ps.setString(4,txtApellido.getText());
-                    ps.setString(5,txtedad.getText());
+                    ps.setString(1,persona.getUsuario());
+                    ps.setString(2,persona.getContraseña());
+                    ps.setString(3,persona.getNombre());
+                    ps.setString(4,persona.getApellido());
+                    ps.setString(5,String.valueOf(persona.getEdad()));
                     if (ConfirmarContra()==true) {
                         ps.executeUpdate();
                         limpiar();
@@ -335,9 +338,7 @@ public class Registro extends javax.swing.JFrame {
                 a[1]=rs.getString(2);
                 
                 System.out.println(a);    
-                
-            }
-                
+            }   
             } catch (SQLException ex) {
             Logger.getLogger(TraductorlogIn.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -345,7 +346,15 @@ public class Registro extends javax.swing.JFrame {
         return rs;
     
     }//GEN-LAST:event_btnregistrActionPerformed
-
+    
+    public void enviarDatos(){
+    
+        persona.setUsuario(txtUsuario.getText());
+        persona.setContraseña(String.valueOf(contra.getPassword()));
+        persona.setNombre(txtNombre.getText());
+        persona.setApellido(txtApellido.getText());
+        persona.setEdad(Integer.parseInt(txtedad.getText()));
+    }
     /**
      * @param args the command line arguments
      */
