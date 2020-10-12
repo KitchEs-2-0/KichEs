@@ -342,7 +342,7 @@ class FondoPanel extends JPanel{
                         String fila[]={String.valueOf(num),txtPalabraIngreso.getText(),palabraesp};
                         dt.addRow(fila);
                         }
-                        num++;//Mandar los resultados a la tabal historial
+                        num++;//Mandar los resultados a la tabla historial
                         //No me funciona
                    rsp.close();
                     
