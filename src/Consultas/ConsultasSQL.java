@@ -39,6 +39,8 @@ public class ConsultasSQL {
         
     }
     
+    
+    
     public String getError(){
         return this.error;
     }

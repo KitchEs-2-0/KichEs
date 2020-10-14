@@ -64,13 +64,13 @@ public class Registro extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         txtUsuario = new javax.swing.JTextField();
-        txtedad = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
         contra = new javax.swing.JPasswordField();
         jLabel7 = new javax.swing.JLabel();
         confirmaContra = new javax.swing.JPasswordField();
         jLabel9 = new javax.swing.JLabel();
         btnregistr = new javax.swing.JButton();
+        cbxedad = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -131,6 +131,8 @@ public class Registro extends javax.swing.JFrame {
             }
         });
 
+        cbxedad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -160,7 +162,7 @@ public class Registro extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(contra, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtedad, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(cbxedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -199,7 +201,7 @@ public class Registro extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -257,7 +259,7 @@ public class Registro extends javax.swing.JFrame {
 
     private void btnregistrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrActionPerformed
         enviarDatos();
-        if ( txtUsuario.getText().equals("")||contra.getText().equals("")||txtNombre.getText().equals("")||txtApellido.getText().equals("")|| txtedad.getText().equals("")) {
+        if ( txtUsuario.getText().equals("")||String.valueOf(contra.getPassword()).equals("")||txtNombre.getText().equals("")||txtApellido.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Necesita llenar todas las casillas para poder registrarse");
         }else{
             if(validarusuario()==true){
@@ -267,14 +269,13 @@ public class Registro extends javax.swing.JFrame {
                     ps.setString(2,persona.getContraseña());
                     ps.setString(3,persona.getNombre());
                     ps.setString(4,persona.getApellido());
-                    ps.setString(5,String.valueOf(persona.getEdad()));
+                    ps.setInt(5,persona.getEdad());
                     if (ConfirmarContra()==true) {
                         ps.executeUpdate();
                         limpiar();
                         JOptionPane.showMessageDialog(null, "Datos gurdados");
                         TraductorlogIn tl=new TraductorlogIn();
                         tl.setVisible(true);
-                        mostrarUsuarioR();
                         this.dispose();
                     }else{
                         JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden");
@@ -313,7 +314,6 @@ public class Registro extends javax.swing.JFrame {
         confirmaContra.setText("");
         txtNombre.setText("");
         txtApellido.setText("");
-        txtedad.setText("");
     }
     
     public boolean ConfirmarContra(){
@@ -348,12 +348,25 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnregistrActionPerformed
     
     public void enviarDatos(){
-    
+        if (combxEdad()==0) {
+            JOptionPane.showMessageDialog(null, "Elija un edad");
+        } else {
         persona.setUsuario(txtUsuario.getText());
         persona.setContraseña(String.valueOf(contra.getPassword()));
         persona.setNombre(txtNombre.getText());
         persona.setApellido(txtApellido.getText());
-        persona.setEdad(Integer.parseInt(txtedad.getText()));
+        persona.setEdad(combxEdad()+3);
+        }
+        
+    }
+    
+    public int combxEdad(){
+        for (int num = 0; num < 71; num++) {
+            if(num==cbxedad.getSelectedIndex()) {
+                return num;
+            }
+        }
+        return 0;
     }
     /**
      * @param args the command line arguments
@@ -393,6 +406,7 @@ public class Registro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnregistr;
+    private javax.swing.JComboBox<String> cbxedad;
     private javax.swing.JPasswordField confirmaContra;
     private javax.swing.JPasswordField contra;
     private javax.swing.JLabel jLabel1;
@@ -407,6 +421,5 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtUsuario;
-    private javax.swing.JTextField txtedad;
     // End of variables declaration//GEN-END:variables
 }

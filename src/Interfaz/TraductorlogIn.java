@@ -5,10 +5,18 @@
  */
 package Interfaz;
 
+import Consultas.ConsultasSQL;
+import Controlador.ConexionBADA;
+import static Interfaz.Traductor.cleanString;
+import Interfaz.Usuario.InicioUsuario;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,6 +24,7 @@ import javax.swing.JPanel;
  */
 public class TraductorlogIn extends javax.swing.JFrame {
 
+    ConexionBADA conecto=new ConexionBADA();
    FondoPanel a=new FondoPanel();
     public TraductorlogIn() {
         this.setContentPane(a);
@@ -49,14 +58,15 @@ public class TraductorlogIn extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jPanel1 = new FondoPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbxelegiridima = new javax.swing.JComboBox<>();
         btnTraduccir = new javax.swing.JToggleButton();
-        btnJuego = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
+        txtPalabraIngreso = new javax.swing.JTextField();
+        lblTraduccion = new javax.swing.JLabel();
+        lblusuariotraductor = new javax.swing.JLabel();
+        btnPerfil = new javax.swing.JButton();
+        btnCerrarSesion = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         jMenu1.setText("jMenu1");
 
@@ -73,111 +83,156 @@ public class TraductorlogIn extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 826));
         jPanel1.setVerifyInputWhenFocusTarget(false);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Traduccion", "Español-kichwa", "Kichwa-Español" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cbxelegiridima.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Traduccion", "Español-kichwa", "Kichwa-Español" }));
+        cbxelegiridima.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cbxelegiridimaActionPerformed(evt);
             }
         });
 
         btnTraduccir.setText("TRADUCIR");
-
-        btnJuego.addActionListener(new java.awt.event.ActionListener() {
+        btnTraduccir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnJuegoActionPerformed(evt);
+                btnTraduccirActionPerformed(evt);
             }
         });
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField2.setToolTipText("Traduccion");
+        txtPalabraIngreso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPalabraIngreso.setToolTipText("Traduccion");
 
-        jLabel1.setText("Historial");
-        jLabel1.setPreferredSize(new java.awt.Dimension(32767, 32767));
+        lblTraduccion.setText("TRADUCCION");
+        lblTraduccion.setPreferredSize(new java.awt.Dimension(1000, 628));
 
-        jLabel2.setText("TRADUCCION");
-        jLabel2.setPreferredSize(new java.awt.Dimension(1000, 628));
+        lblusuariotraductor.setText("Usuario");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Perfil", "Configuraciones", "Cerrar Sesion" }));
+        btnPerfil.setText("Perfil");
+        btnPerfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPerfilActionPerformed(evt);
+            }
+        });
 
-        jLabel3.setText("Usuario");
+        btnCerrarSesion.setText("Cerrar Sesion");
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarSesionActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Idiomas", "Palabra", "Traduccion"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 27, Short.MAX_VALUE)
-                                .addComponent(btnJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(633, 633, 633)
+                        .addComponent(lblusuariotraductor, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPerfil)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(53, 53, 53))
+                        .addComponent(btnCerrarSesion))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(377, 377, 377)
+                        .addComponent(btnTraduccir, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(38, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnTraduccir, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(399, 399, 399))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtPalabraIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbxelegiridima, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(184, 184, 184))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(91, 91, 91))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addComponent(lblTraduccion, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
+                    .addComponent(lblusuariotraductor, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPerfil)
+                    .addComponent(btnCerrarSesion))
+                .addGap(51, 51, 51)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPalabraIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
-                        .addComponent(btnTraduccir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(136, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52))))
+                        .addComponent(btnTraduccir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxelegiridima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblTraduccion, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cbxelegiridimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxelegiridimaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_cbxelegiridimaActionPerformed
 
-    private void btnJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJuegoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnJuegoActionPerformed
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+        Traductor traductor=new Traductor();
+        traductor.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
+    private void btnTraduccirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraduccirActionPerformed
+        if (txtPalabraIngreso.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese una palabra");
+        }else{
+            if (comboBox()==0) {
+            JOptionPane.showMessageDialog(null, "Elige los idimas al que desea traducir");
+            } else {
+                if (comboBox()==1) {
+                    Es_Ki();
+                } else {
+                    Ki_Es();
+                }
+            }
+        }
+    }//GEN-LAST:event_btnTraduccirActionPerformed
+
+    
+    private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
+        InicioUsuario perfil=new InicioUsuario();
+        perfil.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnPerfilActionPerformed
     
     /**
      * @param args the command line arguments
@@ -215,18 +270,94 @@ public class TraductorlogIn extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnJuego;
+    private javax.swing.JButton btnCerrarSesion;
+    private javax.swing.JButton btnPerfil;
     private javax.swing.JToggleButton btnTraduccir;
+    private javax.swing.JComboBox<String> cbxelegiridima;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblTraduccion;
+    public static javax.swing.JLabel lblusuariotraductor;
+    private javax.swing.JTextField txtPalabraIngreso;
     // End of variables declaration//GEN-END:variables
+
+    public int comboBox(){
+        int num=cbxelegiridima.getSelectedIndex();
+        if (num==0) {
+            return 0;
+        } else {
+            if (num==1) {
+                return 1;
+            } else {
+                return 2;
+            }
+        }
+    }
+    
+    
+    public void Es_Ki(){
+        String camb=txtPalabraIngreso.getText().toLowerCase();
+        String nw=cleanString(camb);
+        String cnw=nw.replace("ñ","~n");//esto aun no funciona 
+        System.out.println(cnw);
+        String codigo="SELECT codpalabra2 From palabra1 WHERE palabra1p='"+cnw+"'";
+        
+            ResultSet rsc,rsp;
+            ConsultasSQL con = new ConsultasSQL(conecto.getCon(), codigo);
+            
+            if(con.getError()==null){
+                rsc=con.getResultado();
+                try {
+                    rsc.next();
+                    String coigo2 = rsc.getString("codpalabra2");
+                    String palabra="SELECT palabra2p FROM palabra2 WHERE codPalabra2='"+coigo2+"'";
+                    ConsultasSQL pal=new ConsultasSQL(conecto.getCon(), palabra);
+                    rsp=pal.getResultado();
+                    rsp.next();
+                    String palabraesp = rsp.getString("palabra2p");
+                    lblTraduccion.setText(palabraesp);  
+                   rsp.close();  
+                } catch (SQLException ex) {
+                    ex.getMessage();
+                    lblTraduccion.setText(txtPalabraIngreso.getText());
+                }
+                
+               
+            }
+    }
+    
+    public void Ki_Es(){
+        String camb=txtPalabraIngreso.getText().toLowerCase();
+        String nw=cleanString(camb);
+        String cnw=nw.replace("ñ","~n");//esto aun no funciona 
+        System.out.println(cnw);
+        String codigo="SELECT codPalabra2 FROM palabra2 WHERE palabra2p='"+cnw+"'";
+        
+            ResultSet rsc,rsp;
+            ConsultasSQL con = new ConsultasSQL(conecto.getCon(), codigo);
+            
+            if(con.getError()==null){
+                rsc=con.getResultado();
+                try {
+                    rsc.next();
+                    String coigo2 = rsc.getString("codPalabra2");
+                    String palabra="SELECT palabra1p FROM palabra1 WHERE codpalabra2='"+coigo2+"'";
+                    ConsultasSQL pal=new ConsultasSQL(conecto.getCon(), palabra);
+                    rsp=pal.getResultado();
+                    rsp.next();
+                    String palabraesp = rsp.getString("palabra1p");
+                    lblTraduccion.setText(palabraesp);
+                } catch (SQLException ex) {
+                    ex.getMessage();
+                    lblTraduccion.setText(txtPalabraIngreso.getText());
+                }
+            }
+    }
+    
+    
 }

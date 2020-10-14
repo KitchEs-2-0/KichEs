@@ -5,6 +5,7 @@
  */
 package Interfaz;
 
+import Consultas.ConsultasSQL;
 import Controlador.ConexionBADA;
 import Modelo.CRegistro;
 import java.awt.Graphics;
@@ -23,9 +24,7 @@ import javax.swing.JPanel;
  */
 public class LogIn extends javax.swing.JFrame {
 
-    /**
-     * Creates new form LogIn
-     */
+    ConexionBADA conecta=new ConexionBADA();
     FondoPanel la=new FondoPanel();
     public LogIn() {
         this.setContentPane(la);
@@ -65,6 +64,7 @@ public class LogIn extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
 
         btnatras.setText("Atras");
@@ -144,7 +144,7 @@ public class LogIn extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -168,6 +168,8 @@ public class LogIn extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnatrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnatrasActionPerformed
+        Traductor traductor=new Traductor();
+        traductor.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnatrasActionPerformed
 
@@ -176,7 +178,9 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-        // TODO add your handling code here:
+        Registro registro=new Registro();
+        registro.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     CRegistro login=new CRegistro();
@@ -207,6 +211,28 @@ public class LogIn extends javax.swing.JFrame {
             Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+    
+    public void usuario(){
+        TraductorlogIn tl=new TraductorlogIn();
+        String usuario="SELECT usuario FROM persona WHERE usuario ='" + login.getUsuario() + "' AND password=('" + login.getPassword() + "')";
+        ResultSet rsc;
+            ConsultasSQL con = new ConsultasSQL(conecta.getCon(), usuario);
+            if(con.getError()==null){
+                rsc=con.getResultado();
+                try {
+                    rsc.next();
+                    String coigo2 = rsc.getString("codpalabra2");
+                    tl.lblusuariotraductor.setText(coigo2);
+                   rsc.close();
+                    
+                } catch (SQLException ex) {
+                    ex.getMessage();
+                    tl.lblusuariotraductor.setText(tl.lblusuariotraductor.getText());
+                }
+                
+               
+            }
     }
     /**
      * @param args the command line arguments
