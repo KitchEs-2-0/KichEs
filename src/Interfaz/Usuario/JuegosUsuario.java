@@ -5,15 +5,19 @@
  */
 package Interfaz.Usuario;
 
+import Consultas.ConsultasSQL;
+import Controlador.ConexionBADA;
+import ImagenesJuego.Icons;
+import Interfaz.Preguntas;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author Usuario
  */
 public class JuegosUsuario extends javax.swing.JPanel {
-
-    /**
-     * Creates new form JuegosUsuario
-     */
+ ConexionBADA conecta=new ConexionBADA();
     public JuegosUsuario() {
         initComponents();
     }
@@ -28,36 +32,96 @@ public class JuegosUsuario extends javax.swing.JPanel {
     private void initComponents() {
 
         jRadioButton1 = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jRadioButton1.setText("jRadioButton1");
 
-        setBackground(new java.awt.Color(255, 153, 255));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/3613527513_40e75848-dfdc-4124-af21-1560b279d45c.png"))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel1.setText("JUEGOS");
+        jButton1.setText("Iniciar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(214, 214, 214))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(97, 97, 97)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(137, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(92, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(165, 165, 165)
-                .addComponent(jLabel1)
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(196, 196, 196)
-                .addComponent(jLabel1)
-                .addContainerGap(260, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+     Preguntas pregunta1=new Preguntas();  
+     pregunta1.setVisible(true);
+        InicioUsuario inicio=new InicioUsuario();
+        inicio.dispose();
+        this.setVisible(true);
+    Icons numero=new Icons();
+        
+        loadIcons();
+        int num=numero.Random();
+//        
+        String sql="SELECT pregunta FROM preguntas WHERE codPregunta LIKE '"+num+"';";
+//        System.out.println(numero.Random());
+        ResultSet rs;
+        
+        ConsultasSQL consulta=new ConsultasSQL(conecta.getCon(), sql);
+        if(consulta.getError()==null){
+                rs=consulta.getResultado();
+                try {
+                    rs.next();
+                    String pregunta = rs.getString("pregunta");
+                    pregunta1.lblPreguntas.setText(pregunta);
+                } catch (SQLException ex) {
+                    ex.getMessage();
+                }
+            }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton1;
     // End of variables declaration//GEN-END:variables
+
+     private void loadIcons() {
+       Icons i=new Icons(Preguntas.ImagenSalida);
+       Preguntas.ImagenSalida.add(i).repaint();
+    }
 }

@@ -122,9 +122,9 @@ public class InicioUsuario extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(bntperfil)
-                    .addComponent(btnjuegos)
+                    .addComponent(btnjuegos, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnestadistica))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -211,8 +211,7 @@ public class InicioUsuario extends javax.swing.JFrame {
 
     private void btnatrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnatrasActionPerformed
         TraductorlogIn login=new TraductorlogIn();
-        login.setVisible(true);
-        
+        login.setVisible(true);       
         this.dispose();
     }//GEN-LAST:event_btnatrasActionPerformed
 
