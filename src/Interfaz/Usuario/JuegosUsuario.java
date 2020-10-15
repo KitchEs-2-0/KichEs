@@ -7,7 +7,6 @@ package Interfaz.Usuario;
 
 import Consultas.ConsultasSQL;
 import Controlador.ConexionBADA;
-import ImagenesJuego.Icons;
 import Interfaz.Preguntas;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,7 +39,7 @@ public class JuegosUsuario extends javax.swing.JPanel {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/3613527513_40e75848-dfdc-4124-af21-1560b279d45c.png"))); // NOI18N
 
-        jButton1.setText("Iniciar");
+        jButton1.setText("IR AL JUEGO");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -52,12 +51,13 @@ public class JuegosUsuario extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(214, 214, 214))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(166, 166, 166)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(137, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -65,9 +65,9 @@ public class JuegosUsuario extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addGap(53, 53, 53)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -85,31 +85,8 @@ public class JuegosUsuario extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     Preguntas pregunta1=new Preguntas();  
-     pregunta1.setVisible(true);
-        InicioUsuario inicio=new InicioUsuario();
-        inicio.dispose();
-        this.setVisible(true);
-    Icons numero=new Icons();
-        
-        loadIcons();
-        int num=numero.Random();
-//        
-        String sql="SELECT pregunta FROM preguntas WHERE codPregunta LIKE '"+num+"';";
-//        System.out.println(numero.Random());
-        ResultSet rs;
-        
-        ConsultasSQL consulta=new ConsultasSQL(conecta.getCon(), sql);
-        if(consulta.getError()==null){
-                rs=consulta.getResultado();
-                try {
-                    rs.next();
-                    String pregunta = rs.getString("pregunta");
-                    pregunta1.lblPreguntas.setText(pregunta);
-                } catch (SQLException ex) {
-                    ex.getMessage();
-                }
-            }
+       Preguntas pregunta=new Preguntas();
+       pregunta.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -119,9 +96,4 @@ public class JuegosUsuario extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton1;
     // End of variables declaration//GEN-END:variables
-
-     private void loadIcons() {
-       Icons i=new Icons(Preguntas.ImagenSalida);
-       Preguntas.ImagenSalida.add(i).repaint();
-    }
 }
