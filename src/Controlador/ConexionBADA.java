@@ -52,6 +52,18 @@ public class ConexionBADA {
         }
            
     }
+//    public ResultSet query2(String sql){
+//   
+//        try {
+//            st=con.createStatement();
+//            ResultSet resul=st.
+//            return resul;
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ConexionBADA.class.getName()).log(Level.SEVERE, null, ex);
+//            return null;
+//        }
+//           
+//    }
     
     
     public void noQuery (String nqry){

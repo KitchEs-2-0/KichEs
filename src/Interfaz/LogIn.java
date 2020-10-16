@@ -44,7 +44,7 @@ public class LogIn extends javax.swing.JFrame {
             super.paint(g);
         }
     }
-
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -176,6 +176,7 @@ public class LogIn extends javax.swing.JFrame {
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         ValidarCredenciales();
+        consultar1();
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
@@ -185,14 +186,15 @@ public class LogIn extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
+    
     CRegistro login=new CRegistro();
         public void ValidarCredenciales(){
             login.setUsuario(txtUsuario.getText());
             login.setPassword(String.valueOf(txtpassword.getPassword()));
             if(consultar()==true){
-                TraductorlogIn tl=new TraductorlogIn();
+               
 //                usuario();
-                tl.setVisible(true);
+                lg.setVisible(true);
                 this.dispose();
                 
             }else{
@@ -217,25 +219,30 @@ public class LogIn extends javax.swing.JFrame {
         return false;
     }
     
-    public void usuario(){
-        TraductorlogIn tl=new TraductorlogIn();
-        String usuario="SELECT Nombre,apellido FROM persona WHERE usuario AND password=('" +consultar()+ "')";
-        ResultSet rsc;
-            ConsultasSQL con = new ConsultasSQL(conecta.getCon(), usuario);
-            if(con.getError()==null){
-                rsc=con.getResultado();
-                try {
-                    rsc.next();
-                    String nombre = rsc.getString("Nombre");
-                    String apellido = rsc.getString("apellido");
-                    lg.lblusuariotraductor.setText(nombre);
-                   rsc.close();
-                    
-                } catch (SQLException ex) {
-                    ex.getMessage();
-                }
+    public void consultar1() {
+       
+        try {
+            
+            String sql="SELECT Nombre,apellido,usuario,password,edad FROM persona WHERE usuario LIKE'"+login.getUsuario()+"'";
+            ResultSet rs=conecta.query(sql);
+            if(rs.next()){      
+               String nombre=rs.getString("Nombre");
+               String apel=rs.getString("apellido");
+               String usuario=rs.getString("usuario");
+               
+                System.out.println(nombre+" "+apel+" "+usuario);
+                String a=nombre+" "+apel;
+                lg.lblnombresUT.setText(a);
+                lg.lblusuarioT.setText(usuario);
+                
             }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+    
+   
     /**
      * @param args the command line arguments
      */

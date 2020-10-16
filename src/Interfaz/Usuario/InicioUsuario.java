@@ -5,12 +5,18 @@
  */
 package Interfaz.Usuario;
 
+import Controlador.ConexionBADA;
 import Interfaz.TraductorlogIn;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import Interfaz.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,7 +25,8 @@ import javax.swing.JPanel;
 public class InicioUsuario extends javax.swing.JFrame {
 
  FondoPanel a=new FondoPanel();
-
+    ConexionBADA conecto=new ConexionBADA();
+    DatosUsuario datos=new DatosUsuario();
     public InicioUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -56,6 +63,7 @@ public class InicioUsuario extends javax.swing.JFrame {
         btnestadistica = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnatras = new javax.swing.JButton();
+        lblUsuarioJ = new javax.swing.JLabel();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -146,14 +154,20 @@ public class InicioUsuario extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnatras)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblUsuarioJ, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnatras)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnatras)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(lblUsuarioJ, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -177,8 +191,34 @@ public class InicioUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void usuario(){
+        try {
+            System.out.println(lblUsuarioJ.getText());
+            String sql="SELECT Nombre,apellido,usuario,password,edad FROM persona WHERE usuario LIKE'"+lblUsuarioJ.getText()+"'";
+            ResultSet rs=conecto.query(sql);
+            if(rs.next()){
+                String nombre=rs.getString("Nombre");
+                String apel=rs.getString("apellido");
+                String usuario=rs.getString("usuario");
+                String edad=rs.getString("edad");
+                String password=rs.getString("password");
+                
+                System.out.println(nombre+" "+apel+" "+usuario+" "+edad+" "+password);
+                datos.lblusuario.setText(usuario);
+                datos.lblnombre.setText(nombre);
+                datos.lblapellido.setText(apel);
+                datos.lbledad.setText(edad);
+                datos.lblpassword.setText(password);
+                
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TraductorlogIn.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    }
     private void bntperfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntperfilActionPerformed
-        DatosUsuario datos=new DatosUsuario();
+        
        
        datos.setSize(479, 488);
        datos.setLocation(5, 5);
@@ -186,6 +226,7 @@ public class InicioUsuario extends javax.swing.JFrame {
        Contenedor.add(datos,BorderLayout.CENTER);
        Contenedor.revalidate();
        Contenedor.repaint();
+       usuario();
     }//GEN-LAST:event_bntperfilActionPerformed
 
     private void btnjuegosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnjuegosActionPerformed
@@ -200,20 +241,17 @@ public class InicioUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnjuegosActionPerformed
 
     private void btnestadisticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnestadisticaActionPerformed
-       EstadisticaUsuario estadistica=new EstadisticaUsuario();
-       
-       estadistica.setSize(479, 488);
-       estadistica.setLocation(5, 5);
-       Contenedor.removeAll();
-       Contenedor.add(estadistica,BorderLayout.CENTER);
-       Contenedor.revalidate();
-       Contenedor.repaint();
+//       EstadisticaUsuario estadistica=new EstadisticaUsuario();
+       Estju estadistica=new Estju();
+       this.setVisible(false);
+        estadistica.setVisible(true);
     }//GEN-LAST:event_btnestadisticaActionPerformed
 
     private void btnatrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnatrasActionPerformed
         TraductorlogIn login=new TraductorlogIn();
         login.setVisible(true);       
         this.dispose();
+        
     }//GEN-LAST:event_btnatrasActionPerformed
 
     /**
@@ -261,5 +299,6 @@ public class InicioUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JLabel lblUsuarioJ;
     // End of variables declaration//GEN-END:variables
 }

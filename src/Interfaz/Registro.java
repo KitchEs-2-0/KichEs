@@ -274,8 +274,8 @@ public class Registro extends javax.swing.JFrame {
                         ps.executeUpdate();
                         limpiar();
                         JOptionPane.showMessageDialog(null, "Datos gurdados");
-                        TraductorlogIn tl=new TraductorlogIn();
-                        tl.setVisible(true);
+                        LogIn ll=new LogIn();
+                        ll.setVisible(true);
                         this.dispose();
                     }else{
                         JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden");

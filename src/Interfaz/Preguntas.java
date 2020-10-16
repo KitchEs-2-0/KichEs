@@ -77,7 +77,7 @@ public class Preguntas extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new FondoPanel();
         lblPreguntas = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnsiguinete = new javax.swing.JButton();
         radio2 = new javax.swing.JRadioButton();
         radio1 = new javax.swing.JRadioButton();
         radio3 = new javax.swing.JRadioButton();
@@ -94,10 +94,10 @@ public class Preguntas extends javax.swing.JFrame {
         lblPreguntas.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         lblPreguntas.setText("Pregunta");
 
-        jButton1.setText("Siguiente");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnsiguinete.setText("Siguiente");
+        btnsiguinete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnsiguineteActionPerformed(evt);
             }
         });
 
@@ -147,7 +147,7 @@ public class Preguntas extends javax.swing.JFrame {
                         .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(94, 94, 94)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnsiguinete, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblImagenSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(76, 76, 76)
@@ -174,7 +174,7 @@ public class Preguntas extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(radio3)
                                 .addGap(38, 38, 38)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(btnsiguinete, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(258, 258, 258)
                         .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -203,7 +203,7 @@ public class Preguntas extends javax.swing.JFrame {
        this.dispose();
     }//GEN-LAST:event_btnSalirjuegoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnsiguineteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsiguineteActionPerformed
         Random rd=new Random();
         int numero;
         numero=(rd.nextInt(10-2)); 
@@ -258,7 +258,8 @@ public class Preguntas extends javax.swing.JFrame {
         ramdonPreguntas(num,n);
         
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+    }//GEN-LAST:event_btnsiguineteActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
 //       
@@ -267,9 +268,25 @@ public class Preguntas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void radio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio1ActionPerformed
-        // TODO add your handling code here:
+//        int contador=1; 
+//        int sum =0;
+//        contador++;
+//        sum= sum+contador;
+//        System.out.println("contador"+sum);
+          Acumulador();
     }//GEN-LAST:event_radio1ActionPerformed
-   
+              public void Acumulador() {
+	
+		int[] lista = new int[100]; // Lista de números enteros que supondremos llena.
+		int acumulador = 0; // Declaramos e inicializamos el acumulaador.
+
+		for (int i = 0; i < 100; i++)
+	        acumulador += lista[i]; // Incrementamos el acumulador
+
+		
+		System.out.println("La suma es " + acumulador);
+           
+            }
     
     
     /**
@@ -311,8 +328,8 @@ public class Preguntas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnSalirjuego;
+    private javax.swing.JButton btnsiguinete;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     public static javax.swing.JLabel lblImagenSalida;
     public javax.swing.JLabel lblPreguntas;

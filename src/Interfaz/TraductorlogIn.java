@@ -13,6 +13,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -26,7 +28,7 @@ public class TraductorlogIn extends javax.swing.JFrame {
     ConexionBADA conecto=new ConexionBADA();
    FondoPanel a=new FondoPanel();
    
-   
+
     public TraductorlogIn() {
         this.setContentPane(a);
         initComponents();
@@ -63,9 +65,10 @@ public class TraductorlogIn extends javax.swing.JFrame {
         btnTraduccir = new javax.swing.JToggleButton();
         txtPalabraIngreso = new javax.swing.JTextField();
         lblTraduccion = new javax.swing.JLabel();
-        lblusuariotraductor = new javax.swing.JLabel();
+        lblnombresUT = new javax.swing.JLabel();
         btnPerfil = new javax.swing.JButton();
         btnCerrarSesion = new javax.swing.JButton();
+        lblusuarioT = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -79,6 +82,7 @@ public class TraductorlogIn extends javax.swing.JFrame {
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 826));
@@ -138,8 +142,10 @@ public class TraductorlogIn extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(633, 633, 633)
-                        .addComponent(lblusuariotraductor, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblusuarioT, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblnombresUT, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPerfil)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -147,9 +153,9 @@ public class TraductorlogIn extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(377, 377, 377)
                         .addComponent(btnTraduccir, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGap(58, 58, 58))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(122, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(txtPalabraIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,11 +173,16 @@ public class TraductorlogIn extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblusuariotraductor, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPerfil)
-                    .addComponent(btnCerrarSesion))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblnombresUT, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPerfil)
+                            .addComponent(btnCerrarSesion)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(lblusuarioT, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(51, 51, 51)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -183,7 +194,7 @@ public class TraductorlogIn extends javax.swing.JFrame {
                 .addComponent(lblTraduccion, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -209,7 +220,7 @@ public class TraductorlogIn extends javax.swing.JFrame {
         traductor.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
-
+   InicioUsuario perfil=new InicioUsuario();
     private void btnTraduccirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraduccirActionPerformed
         if (txtPalabraIngreso.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Ingrese una palabra");
@@ -228,9 +239,10 @@ public class TraductorlogIn extends javax.swing.JFrame {
 
     
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
-        InicioUsuario perfil=new InicioUsuario();
+        
         perfil.setVisible(true);
         this.dispose();
+        usuario();
     }//GEN-LAST:event_btnPerfilActionPerformed
     
     /**
@@ -281,7 +293,8 @@ public class TraductorlogIn extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblTraduccion;
-    public javax.swing.JLabel lblusuariotraductor;
+    public javax.swing.JLabel lblnombresUT;
+    public javax.swing.JLabel lblusuarioT;
     private javax.swing.JTextField txtPalabraIngreso;
     // End of variables declaration//GEN-END:variables
 
@@ -358,5 +371,23 @@ public class TraductorlogIn extends javax.swing.JFrame {
             }
     }
     
+    public void usuario(){
+        try {
+            System.out.println(lblnombresUT.getText());
+            String sql="SELECT usuario FROM persona WHERE usuario LIKE'"+lblusuarioT.getText()+"'";
+            ResultSet rs=conecto.query(sql);
+            if(rs.next()){
+                
+                String usuario=rs.getString("usuario");
+                System.out.println(usuario);
+                perfil.lblUsuarioJ.setText(usuario);
+                
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TraductorlogIn.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    }
     
 }
