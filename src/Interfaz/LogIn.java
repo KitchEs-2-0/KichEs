@@ -24,6 +24,7 @@ import javax.swing.JPanel;
  */
 public class LogIn extends javax.swing.JFrame {
 
+    TraductorlogIn lg=new TraductorlogIn();
     ConexionBADA conecta=new ConexionBADA();
     FondoPanel la=new FondoPanel();
     public LogIn() {
@@ -181,6 +182,7 @@ public class LogIn extends javax.swing.JFrame {
         Registro registro=new Registro();
         registro.setVisible(true);
         this.dispose();
+        
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     CRegistro login=new CRegistro();
@@ -189,10 +191,12 @@ public class LogIn extends javax.swing.JFrame {
             login.setPassword(String.valueOf(txtpassword.getPassword()));
             if(consultar()==true){
                 TraductorlogIn tl=new TraductorlogIn();
+//                usuario();
                 tl.setVisible(true);
                 this.dispose();
+                
             }else{
-                 JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecta");
+                JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecta");
                 txtpassword.setText("");
             }                    
                 
@@ -215,23 +219,21 @@ public class LogIn extends javax.swing.JFrame {
     
     public void usuario(){
         TraductorlogIn tl=new TraductorlogIn();
-        String usuario="SELECT usuario FROM persona WHERE usuario ='" + login.getUsuario() + "' AND password=('" + login.getPassword() + "')";
+        String usuario="SELECT Nombre,apellido FROM persona WHERE usuario AND password=('" +consultar()+ "')";
         ResultSet rsc;
             ConsultasSQL con = new ConsultasSQL(conecta.getCon(), usuario);
             if(con.getError()==null){
                 rsc=con.getResultado();
                 try {
                     rsc.next();
-                    String coigo2 = rsc.getString("codpalabra2");
-                    tl.lblusuariotraductor.setText(coigo2);
+                    String nombre = rsc.getString("Nombre");
+                    String apellido = rsc.getString("apellido");
+                    lg.lblusuariotraductor.setText(nombre);
                    rsc.close();
                     
                 } catch (SQLException ex) {
                     ex.getMessage();
-                    tl.lblusuariotraductor.setText(tl.lblusuariotraductor.getText());
                 }
-                
-               
             }
     }
     /**

@@ -110,22 +110,23 @@ public class InicioUsuario extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(92, 92, 92)
+                .addGap(86, 86, 86)
                 .addComponent(bntperfil)
-                .addGap(68, 68, 68)
+                .addGap(74, 74, 74)
                 .addComponent(btnjuegos)
                 .addGap(70, 70, 70)
                 .addComponent(btnestadistica)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(bntperfil)
-                    .addComponent(btnjuegos, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnestadistica))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnjuegos, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnestadistica)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

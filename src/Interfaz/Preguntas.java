@@ -6,10 +6,22 @@ import Controlador.ConexionBADA;
 import Interfaz.Usuario.InicioUsuario;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
 /**
@@ -32,8 +44,6 @@ public class Preguntas extends javax.swing.JFrame {
         this.setTitle("YUPAYKUNA--LOS NUMEROS");
         for (int i = 1; i <11; i++) {
             imagen1[i]=new ImageIcon(getClass().getResource("/ImagenesJuegoN1/Numero"+i+".png")); 
-            
-//                    ImageIcon(getClass().getResource("/ImagenesJuego/ImagenPrueba"+i+".jpg"));
         }
             lblImagenSalida.setIcon(imagen1[1]);
        
@@ -201,10 +211,12 @@ public class Preguntas extends javax.swing.JFrame {
         }
         System.out.println(numero);
         
-        String sql="SELECT pregunta, Respuesta FROM preguntas WHERE codPregunta LIKE '"+numero+"';";
+        String sql="SELECT preguntas.pregunta, preguntas.Respuesta,imagen.imagen FROM preguntas, imagen WHERE preguntas.codPregunta LIKE '"+numero+"';";
 //        System.out.println(numero.Random());
         ResultSet rs;
-        
+        ImageIcon foto= conecta.getFoto(Integer.valueOf(numero));
+        InputStream is=null;
+        ImageIcon ii=null ;
         ConsultasSQL consulta=new ConsultasSQL(conecta.getCon(), sql);
         if(consulta.getError()==null){
                 rs=consulta.getResultado();
@@ -214,12 +226,21 @@ public class Preguntas extends javax.swing.JFrame {
                     lblPreguntas.setText(pregunta);
                     String respuesta=rs.getString("Respuesta");
                     radio1.setText(respuesta);
+                    if(foto!=null){
+                        lblImagenSalida.setIcon(foto);
+                    }else{
+                        lblImagenSalida.setIcon(null);
+                    }
+                    lblImagenSalida.updateUI();
+                    
                 } catch (SQLException ex) {
                     ex.getMessage();
                 }
             }
 
         lblImagenSalida.setIcon(imagen1[numero]);
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
@@ -283,4 +304,19 @@ public class Preguntas extends javax.swing.JFrame {
     private javax.swing.JRadioButton radio1;
     // End of variables declaration//GEN-END:variables
 
+    public void ramdonPreguntas(){
+        Map<Integer, String> treeMap = new TreeMap<Integer, String>();
+            treeMap.put(1, "");           treeMap.put(7, "Roxana");
+            treeMap.put(2, "Miguel");           treeMap.put(8, "Pablo");
+            treeMap.put(3, "Carmen");           treeMap.put(9, "Xavier");
+            treeMap.put(4, "Rogelio");          treeMap.put(10, "Luis");
+            treeMap.put(5, "Pedrito");         treeMap.put(11, "Natali");
+            treeMap.put(6,"Vanessa");
+            treeMap.put(12, "Carlos");           treeMap.put(18, "Roxana");
+            treeMap.put(13, "Miguel");           treeMap.put(19, "Pablo");
+            treeMap.put(14, "Carmen");           treeMap.put(19, "Xavier");
+            treeMap.put(15, "Rogelio");          treeMap.put(20, "Luis");
+            treeMap.put(16, "Pedrito");         treeMap.put(21, "Natali");
+            treeMap.put(17,"Vanessa");
+    }
 }

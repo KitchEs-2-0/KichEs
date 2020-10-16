@@ -23,13 +23,14 @@ import javax.swing.table.DefaultTableModel;
  * @author Usuario
  */
 public class TraductorlogIn extends javax.swing.JFrame {
-
     ConexionBADA conecto=new ConexionBADA();
    FondoPanel a=new FondoPanel();
+   
+   
     public TraductorlogIn() {
         this.setContentPane(a);
         initComponents();
-        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null); 
     }
 
     class FondoPanel extends JPanel{
@@ -102,8 +103,6 @@ public class TraductorlogIn extends javax.swing.JFrame {
 
         lblTraduccion.setText("TRADUCCION");
         lblTraduccion.setPreferredSize(new java.awt.Dimension(1000, 628));
-
-        lblusuariotraductor.setText("Usuario");
 
         btnPerfil.setText("Perfil");
         btnPerfil.addActionListener(new java.awt.event.ActionListener() {
@@ -282,7 +281,7 @@ public class TraductorlogIn extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblTraduccion;
-    public static javax.swing.JLabel lblusuariotraductor;
+    public javax.swing.JLabel lblusuariotraductor;
     private javax.swing.JTextField txtPalabraIngreso;
     // End of variables declaration//GEN-END:variables
 

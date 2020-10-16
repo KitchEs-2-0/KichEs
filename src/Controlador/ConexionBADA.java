@@ -1,5 +1,8 @@
 package Controlador;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -7,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 public class ConexionBADA {
     private Connection con;
@@ -68,5 +73,23 @@ public class ConexionBADA {
         this.con = con;
     }
     
+    
+    public  ImageIcon getFoto(int id){
+        
+            String sql="SELECT  imagen FROM imagen WHERE codImagen='"+id+"'";
+            ImageIcon ii=null;
+            InputStream is = null;
+            try {
+                st=con.createStatement();
+                rs=st.executeQuery(sql);
+                if(rs.next()){
+                is= rs.getBinaryStream(1);
+                BufferedImage bi=ImageIO.read(is);
+                ii=new ImageIcon(bi);
+            }
+        } catch (SQLException ex){ex.printStackTrace();} catch(IOException ex){ex.printStackTrace();} 
+           
+        return ii;
+    }
     
 }
