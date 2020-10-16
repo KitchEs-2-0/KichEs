@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -23,6 +24,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 /**
  *
@@ -76,9 +78,9 @@ public class Preguntas extends javax.swing.JFrame {
         jPanel1 = new FondoPanel();
         lblPreguntas = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        btnhola = new javax.swing.JRadioButton();
+        radio2 = new javax.swing.JRadioButton();
         radio1 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        radio3 = new javax.swing.JRadioButton();
         btnSalirjuego = new javax.swing.JButton();
         btnIniciar = new javax.swing.JButton();
         lblImagenSalida = new javax.swing.JLabel();
@@ -99,8 +101,8 @@ public class Preguntas extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup1.add(btnhola);
-        btnhola.setText("Hola");
+        buttonGroup1.add(radio2);
+        radio2.setText("Hola");
 
         buttonGroup1.add(radio1);
         radio1.setText("jRadioButton2");
@@ -110,8 +112,8 @@ public class Preguntas extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("jRadioButton3");
+        buttonGroup1.add(radio3);
+        radio3.setText("jRadioButton3");
 
         btnSalirjuego.setText("Salir");
         btnSalirjuego.addActionListener(new java.awt.event.ActionListener() {
@@ -151,8 +153,8 @@ public class Preguntas extends javax.swing.JFrame {
                                 .addGap(76, 76, 76)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(radio1)
-                                    .addComponent(btnhola)
-                                    .addComponent(jRadioButton3))))))
+                                    .addComponent(radio2)
+                                    .addComponent(radio3))))))
                 .addContainerGap(80, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -168,9 +170,9 @@ public class Preguntas extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(radio1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnhola)
+                                .addComponent(radio2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton3)
+                                .addComponent(radio3)
                                 .addGap(38, 38, 38)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -240,6 +242,21 @@ public class Preguntas extends javax.swing.JFrame {
 
         lblImagenSalida.setIcon(imagen1[numero]);
         
+        Random r=new Random();
+        int num;
+        num=(r.nextInt(20-2)); 
+        if (num==0) {
+            num=num+1; 
+        }
+        
+        Random a=new Random();
+        int n;
+        n=(a.nextInt(20-2)); 
+        if (n==0) {
+            n=n+1; 
+        }
+        ramdonPreguntas(num,n);
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -294,29 +311,42 @@ public class Preguntas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnSalirjuego;
-    private javax.swing.JRadioButton btnhola;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton3;
     public static javax.swing.JLabel lblImagenSalida;
     public javax.swing.JLabel lblPreguntas;
     private javax.swing.JRadioButton radio1;
+    private javax.swing.JRadioButton radio2;
+    private javax.swing.JRadioButton radio3;
     // End of variables declaration//GEN-END:variables
 
-    public void ramdonPreguntas(){
+    public void ramdonPreguntas(int num1, int num2){
         Map<Integer, String> treeMap = new TreeMap<Integer, String>();
-            treeMap.put(1, "");           treeMap.put(7, "Roxana");
-            treeMap.put(2, "Miguel");           treeMap.put(8, "Pablo");
-            treeMap.put(3, "Carmen");           treeMap.put(9, "Xavier");
-            treeMap.put(4, "Rogelio");          treeMap.put(10, "Luis");
-            treeMap.put(5, "Pedrito");         treeMap.put(11, "Natali");
-            treeMap.put(6,"Vanessa");
-            treeMap.put(12, "Carlos");           treeMap.put(18, "Roxana");
-            treeMap.put(13, "Miguel");           treeMap.put(19, "Pablo");
-            treeMap.put(14, "Carmen");           treeMap.put(19, "Xavier");
-            treeMap.put(15, "Rogelio");          treeMap.put(20, "Luis");
-            treeMap.put(16, "Pedrito");         treeMap.put(21, "Natali");
-            treeMap.put(17,"Vanessa");
-    }
+            treeMap.put(1, "PICHKA CHUNKA");        treeMap.put(7, "CHUSKU CHUNKA");
+            treeMap.put(2, "PATSAK");               treeMap.put(8, "CHUNKA PUSAK");
+            treeMap.put(3, "HUNU");                 treeMap.put(9, "PUSAK PATSAK");
+            treeMap.put(4, "SUKTA PATSAK");         treeMap.put(10, "CHUNKA SHUK");
+            treeMap.put(5, "WARANKA");              treeMap.put(11, "TAWA CHUNKA");
+            treeMap.put(6,"CHUSKU PATSAK");
+            treeMap.put(12, "SUKTA CHUNKA");        treeMap.put(18, "CHUNKA PISQAYOP");
+            treeMap.put(13, "CHUNKA PUSAK");        treeMap.put(19, "QANCHIS CHUNKA");
+            treeMap.put(14, "ISHKAY CHUNKA");       treeMap.put(20, "PUSAQ CHUNKA");
+            treeMap.put(15, "PUSAK CHUNKA");          
+            treeMap.put(16, "CHUNKA SHUK");         
+            treeMap.put(17,"KIMSA PATSAK");
+                
+                    
+                    Iterator<Integer> it = treeMap.keySet().iterator();
+                    while(it.hasNext()){
+                    Integer key = it.next();
+                    if (key==num1) {
+                        radio2.setText(treeMap.get(key));
+                    }
+                    if (key==num2) {
+                         radio3.setText(treeMap.get(key));   
+                    }
+                }
+                   
+            }
 }
