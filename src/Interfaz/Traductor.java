@@ -8,11 +8,13 @@ package Interfaz;
 import Consultas.ConsultasSQL;
 import Controlador.ConexionBADA;
 import Modelo.Usuario;
+import Modelo.cTraductor;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.Normalizer;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -25,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
 public class Traductor extends javax.swing.JFrame {
     ConexionBADA conecto= new ConexionBADA();
     Usuario usuario=new Usuario();
-    
+    public static ArrayList<cTraductor> lista= new ArrayList();
     FondoPanel ab=new FondoPanel();
     public Traductor() {
         this.setContentPane(ab);
@@ -122,15 +124,23 @@ class FondoPanel extends JPanel{
 
         tablahistorial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "N°", "Palabra", "Traduccion"
+                "Palabra", "Traduccion"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tablahistorial);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -178,7 +188,7 @@ class FondoPanel extends JPanel{
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrarse)
                     .addComponent(btnIniciarSesion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPalabraIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxelegiridima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -247,9 +257,38 @@ class FondoPanel extends JPanel{
                 }
             }
         }
+        cTraductor traduce=new cTraductor();
+        lista.add(traduce);
+        String palabraing=txtPalabraIngreso.getText();
+        String paltraduccion=lblTraduccion.getText();
         
-    }//GEN-LAST:event_btnTraduccirActionPerformed
 
+       traduce.setPalabraingreso(palabraing);
+       traduce.setPalabrasalida(paltraduccion);
+      
+        mostrar();
+    }//GEN-LAST:event_btnTraduccirActionPerformed
+     
+    
+    public void mostrar(){
+   
+        String matriz[][]=new String [lista.size()][2];
+        for(int i=0; i<lista.size(); i++){
+//            personas p1 = (personas)apersona.get(i);
+            matriz[i][0]=lista.get(i).getPalabraingreso();
+            matriz[i][1]=lista.get(i).getPalabrasalida();
+            
+            tablahistorial.setModel(new javax.swing.table.DefaultTableModel(
+            matriz,
+            new String [] {
+                "Palabra Ingreso", "Traduccion"
+            }
+        ));
+       
+   
+        }
+               
+    }
     public static String cleanString(String texto) {
         texto = Normalizer.normalize(texto, Normalizer.Form.NFD);
         texto = texto.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");

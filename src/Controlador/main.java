@@ -8,7 +8,7 @@ public class main {
     public static void main(String[]args){
         Inicio inicio=new Inicio();
        inicio.setVisible(true);
-//        esperar(3);
+        esperar(3);
         inicio.setVisible(false);
         Traductor t1=new Traductor();
         t1.setVisible(true);

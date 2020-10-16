@@ -8,11 +8,14 @@ package Interfaz;
 import Consultas.ConsultasSQL;
 import Controlador.ConexionBADA;
 import static Interfaz.Traductor.cleanString;
+import static Interfaz.Traductor.lista;
 import Interfaz.Usuario.InicioUsuario;
+import Modelo.cTraductor;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -26,6 +29,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TraductorlogIn extends javax.swing.JFrame {
     ConexionBADA conecto=new ConexionBADA();
+     public static ArrayList<cTraductor> lista= new ArrayList();
    FondoPanel a=new FondoPanel();
    
 
@@ -70,7 +74,7 @@ public class TraductorlogIn extends javax.swing.JFrame {
         btnCerrarSesion = new javax.swing.JButton();
         lblusuarioT = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableTrad = new javax.swing.JTable();
 
         jMenu1.setText("jMenu1");
 
@@ -105,7 +109,9 @@ public class TraductorlogIn extends javax.swing.JFrame {
         txtPalabraIngreso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtPalabraIngreso.setToolTipText("Traduccion");
 
-        lblTraduccion.setText("TRADUCCION");
+        lblTraduccion.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblTraduccion.setText("   TRADUCCION");
+        lblTraduccion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         lblTraduccion.setPreferredSize(new java.awt.Dimension(1000, 628));
 
         btnPerfil.setText("Perfil");
@@ -122,18 +128,26 @@ public class TraductorlogIn extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableTrad.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Idiomas", "Palabra", "Traduccion"
+                "Palabra", "Traduccion"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tableTrad);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -166,8 +180,8 @@ public class TraductorlogIn extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(91, 91, 91))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(178, 178, 178)
-                .addComponent(lblTraduccion, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(307, 307, 307)
+                .addComponent(lblTraduccion, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -235,9 +249,37 @@ public class TraductorlogIn extends javax.swing.JFrame {
                 }
             }
         }
+        cTraductor traduce=new cTraductor();
+        lista.add(traduce);
+        String palabraing=txtPalabraIngreso.getText();
+        String paltraduccion=lblTraduccion.getText();
+        
+
+       traduce.setPalabraingreso(palabraing);
+       traduce.setPalabrasalida(paltraduccion);
+      
+        mostrar();
     }//GEN-LAST:event_btnTraduccirActionPerformed
 
-    
+    public void mostrar(){
+   
+        String matriz[][]=new String [lista.size()][2];
+        for(int i=0; i<lista.size(); i++){
+//            personas p1 = (personas)apersona.get(i);
+            matriz[i][0]=lista.get(i).getPalabraingreso();
+            matriz[i][1]=lista.get(i).getPalabrasalida();
+            
+            tableTrad.setModel(new javax.swing.table.DefaultTableModel(
+            matriz,
+            new String [] {
+                "Palabra Ingreso", "Traduccion"
+            }
+        ));
+       
+   
+        }
+               
+    }
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
         
         perfil.setVisible(true);
@@ -291,10 +333,10 @@ public class TraductorlogIn extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblTraduccion;
     public javax.swing.JLabel lblnombresUT;
     public javax.swing.JLabel lblusuarioT;
+    private javax.swing.JTable tableTrad;
     private javax.swing.JTextField txtPalabraIngreso;
     // End of variables declaration//GEN-END:variables
 

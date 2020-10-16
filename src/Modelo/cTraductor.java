@@ -16,8 +16,26 @@ public class cTraductor {
     private String codIdioma12Tra;
     private String codIdioma2Tra;
     private String codUsuario;
+    private String palabraingreso;
+    private String palabrasalida;
 
     public cTraductor() {
+    }
+
+    public String getPalabraingreso() {
+        return palabraingreso;
+    }
+
+    public void setPalabraingreso(String palabraingreso) {
+        this.palabraingreso = palabraingreso;
+    }
+
+    public String getPalabrasalida() {
+        return palabrasalida;
+    }
+
+    public void setPalabrasalida(String palabrasalida) {
+        this.palabrasalida = palabrasalida;
     }
 
     public String getCodTraductor() {
