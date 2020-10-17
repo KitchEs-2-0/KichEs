@@ -116,7 +116,6 @@ class FondoPanel extends JPanel{
 
         lblTraduccion.setBackground(new java.awt.Color(51, 204, 0));
         lblTraduccion.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lblTraduccion.setText("TRADUCCION");
         lblTraduccion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -188,7 +187,7 @@ class FondoPanel extends JPanel{
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrarse)
                     .addComponent(btnIniciarSesion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPalabraIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxelegiridima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -244,6 +243,10 @@ class FondoPanel extends JPanel{
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void btnTraduccirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraduccirActionPerformed
+        
+            
+            
+
         if (txtPalabraIngreso.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Ingrese una palabra");
         }else{
@@ -252,23 +255,26 @@ class FondoPanel extends JPanel{
             } else {
                 if (comboBox()==1) {
                     Es_Ki();
+                    enviarDatos();
                 } else {
                     Ki_Es();
+                    enviarDatos();
                 }
             }
         }
-        cTraductor traduce=new cTraductor();
+      
+        
+    }//GEN-LAST:event_btnTraduccirActionPerformed
+     
+   public void enviarDatos(){
+       cTraductor traduce=new cTraductor();
         lista.add(traduce);
         String palabraing=txtPalabraIngreso.getText();
         String paltraduccion=lblTraduccion.getText();
-        
-
-       traduce.setPalabraingreso(palabraing);
-       traduce.setPalabrasalida(paltraduccion);
-      
+        traduce.setPalabraingreso(palabraing);
+        traduce.setPalabrasalida(paltraduccion);
         mostrar();
-    }//GEN-LAST:event_btnTraduccirActionPerformed
-     
+   }
     
     public void mostrar(){
    

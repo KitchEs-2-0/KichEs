@@ -86,6 +86,7 @@ public class TraductorlogIn extends javax.swing.JFrame {
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -110,7 +111,6 @@ public class TraductorlogIn extends javax.swing.JFrame {
         txtPalabraIngreso.setToolTipText("Traduccion");
 
         lblTraduccion.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lblTraduccion.setText("   TRADUCCION");
         lblTraduccion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         lblTraduccion.setPreferredSize(new java.awt.Dimension(1000, 628));
 
@@ -208,7 +208,7 @@ public class TraductorlogIn extends javax.swing.JFrame {
                 .addComponent(lblTraduccion, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -219,7 +219,9 @@ public class TraductorlogIn extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 41, Short.MAX_VALUE))
         );
 
         pack();
@@ -244,23 +246,26 @@ public class TraductorlogIn extends javax.swing.JFrame {
             } else {
                 if (comboBox()==1) {
                     Es_Ki();
+                    enviarDatos();
                 } else {
                     Ki_Es();
+                    enviarDatos();
                 }
             }
         }
-        cTraductor traduce=new cTraductor();
+      
+    }//GEN-LAST:event_btnTraduccirActionPerformed
+
+     public void enviarDatos(){
+       cTraductor traduce=new cTraductor();
         lista.add(traduce);
         String palabraing=txtPalabraIngreso.getText();
         String paltraduccion=lblTraduccion.getText();
-        
-
-       traduce.setPalabraingreso(palabraing);
-       traduce.setPalabrasalida(paltraduccion);
-      
+        traduce.setPalabraingreso(palabraing);
+        traduce.setPalabrasalida(paltraduccion);
         mostrar();
-    }//GEN-LAST:event_btnTraduccirActionPerformed
-
+   }
+     
     public void mostrar(){
    
         String matriz[][]=new String [lista.size()][2];

@@ -5,10 +5,18 @@
  */
 package Interfaz.Usuario;
 
+import Controlador.ConexionBADA;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,8 +24,11 @@ import javax.swing.JPanel;
  */
 public class EstadisticaUsuario extends javax.swing.JPanel {
     
+    ConexionBADA con=new ConexionBADA();
+    DefaultTableModel modelo = new DefaultTableModel();
     public EstadisticaUsuario() {
         initComponents();
+
     }
 
     /**
@@ -29,44 +40,227 @@ public class EstadisticaUsuario extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTree1 = new javax.swing.JTree();
+        jTextField1 = new javax.swing.JTextField();
+        txtCampo = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtEstadistica = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
+        lblporcentaje = new javax.swing.JLabel();
+        bprogress = new javax.swing.JProgressBar();
+        txtvalor = new javax.swing.JTextField();
+        btningresar = new javax.swing.JButton();
+        lblporcentBADA = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel1.setText("Estadistica");
+        jScrollPane2.setViewportView(jTree1);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(119, 119, 119)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(163, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(184, 184, 184)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(269, Short.MAX_VALUE))
-        );
+        jTextField1.setText("jTextField1");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(txtCampo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 200, -1));
+
+        jtEstadistica.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jtEstadistica.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtEstadisticaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtEstadistica);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 420, 97));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel3.setText("Usuario:");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
+
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, -1, -1));
+
+        lblporcentaje.setBackground(new java.awt.Color(0, 0, 0));
+        add(lblporcentaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, 80, 30));
+
+        bprogress.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bprogress.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        add(bprogress, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 420, 40));
+        add(txtvalor, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 60, -1));
+
+        btningresar.setText("Ingresar valor");
+        btningresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btningresarActionPerformed(evt);
+            }
+        });
+        add(btningresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 110, 30));
+
+        lblporcentBADA.setText("jLabel2");
+        add(lblporcentBADA, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 244, 80, 20));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/pantallaEstadistica.png"))); // NOI18N
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 490));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        InicioUsuario a=new InicioUsuario();
+        String campo=a.lblUsuarioJ.getText();
+        System.out.println(campo);
+        
+            try {
+                DefaultTableModel modelo = new DefaultTableModel();
+                jtEstadistica.setModel(modelo);
+
+                PreparedStatement ps = null;
+                ResultSet rs = null;
+                Connection conn = con.getCon();
+                String b="baja";
+                String sql = "SELECT codJuego, Dificultad, usuarioJ, estadistica FROM juego WHERE usuarioJ LIKE 'KevinAche' AND Dificultad LIKE '"+b+"'";
+                System.out.println(sql);
+                ps = conn.prepareStatement(sql);
+                rs = ps.executeQuery();
+                
+                String porcent=rs.getString("estadistica");
+                System.out.println(porcent);
+                lblporcentBADA.setText(porcent);
+
+                ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+                int cantidadColumnas = rsMd.getColumnCount();
+
+                modelo.addColumn("Código");
+                modelo.addColumn("Dificultad");
+                modelo.addColumn("Usuario");
+                modelo.addColumn("Estadistica");
+                int[] anchos = {50, 200, 50, 50};
+                for (int i = 0; i < jtEstadistica.getColumnCount(); i++) {
+                    jtEstadistica.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+                }
+
+                while (rs.next()) {
+                    Object[] filas = new Object[cantidadColumnas];
+                    for (int i = 0; i < cantidadColumnas; i++) {
+                        filas[i] = rs.getObject(i + 1);
+                    }
+                    modelo.addRow(filas);
+                }
+
+            } catch (Exception ex) {
+                System.err.println(ex.toString());
+            }
+        
+       
+//        String campo = txtCampo.getText();
+//        String where = "";
+//        if (!"".equals(campo)) {
+//            where = "WHERE usuarioJ = '" + campo + "'";
+//            try {
+//                DefaultTableModel modelo = new DefaultTableModel();
+//                jtEstadistica.setModel(modelo);
+//
+//                PreparedStatement ps = null;
+//                ResultSet rs = null;
+//                Connection conn = con.getCon();
+//
+//                String sql = "SELECT codJuego, Dificultad, usuarioJ, estadistica FROM juego " + where;
+//                System.out.println(sql);
+//                ps = conn.prepareStatement(sql);
+//                rs = ps.executeQuery();
+//                
+//                int porcent=Integer.parseInt(rs.getString("estadistica"));
+//                lblporcentBADA.setText(String.valueOf(porcent));
+//
+//                ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+//                int cantidadColumnas = rsMd.getColumnCount();
+//
+//                modelo.addColumn("Código");
+//                modelo.addColumn("Dificultad");
+//                modelo.addColumn("Usuario");
+//                modelo.addColumn("Estadistica");
+//                int[] anchos = {50, 200, 50, 50};
+//                for (int i = 0; i < jtEstadistica.getColumnCount(); i++) {
+//                    jtEstadistica.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+//                }
+//
+//                while (rs.next()) {
+//                    Object[] filas = new Object[cantidadColumnas];
+//                    for (int i = 0; i < cantidadColumnas; i++) {
+//                        filas[i] = rs.getObject(i + 1);
+//                    }
+//                    modelo.addRow(filas);
+//                }
+//
+//            } catch (Exception ex) {
+//                System.err.println(ex.toString());
+//            }
+//        }else{
+//            JOptionPane.showMessageDialog(null, "Ingrese un usuario para buscar");
+//        }
+        ingresarvalor();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void jtEstadisticaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtEstadisticaMouseClicked
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            //            Conexion objCon = new Conexion();
+            Connection conn = con.getCon();
+
+            int Fila = jtEstadistica.getSelectedRow();
+            String usuarioJ = jtEstadistica.getValueAt(Fila, 3).toString();
+
+            ps = conn.prepareStatement("SELECT codJuego, Dificultad, usuarioJ, estadistica FROM juego WHERE usuarioJ=?");
+            ps.setString(1, usuarioJ);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    }//GEN-LAST:event_jtEstadisticaMouseClicked
+
+    private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed
+        
+    }//GEN-LAST:event_btningresarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JProgressBar bprogress;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btningresar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTree jTree1;
+    private javax.swing.JTable jtEstadistica;
+    private javax.swing.JLabel lblporcentBADA;
+    private javax.swing.JLabel lblporcentaje;
+    private javax.swing.JTextField txtCampo;
+    private javax.swing.JTextField txtvalor;
     // End of variables declaration//GEN-END:variables
+
+    public void ingresarvalor(){
+        double valor=Integer.parseInt(lblporcentBADA.getText());
+        bprogress.setValue((int) valor);
+        lblporcentaje.setText(valor+"%");
+    }
+
 }

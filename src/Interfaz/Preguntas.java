@@ -22,9 +22,9 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import java.applet.AudioClip;
 
 /**
  *
@@ -84,6 +84,7 @@ public class Preguntas extends javax.swing.JFrame {
         btnSalirjuego = new javax.swing.JButton();
         btnIniciar = new javax.swing.JButton();
         lblImagenSalida = new javax.swing.JLabel();
+        btnaudio = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 255, 255));
@@ -129,6 +130,13 @@ public class Preguntas extends javax.swing.JFrame {
             }
         });
 
+        btnaudio.setText("Audio");
+        btnaudio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnaudioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -150,11 +158,16 @@ public class Preguntas extends javax.swing.JFrame {
                             .addComponent(btnsiguinete, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblImagenSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(76, 76, 76)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(radio1)
-                                    .addComponent(radio2)
-                                    .addComponent(radio3))))))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(76, 76, 76)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(radio1)
+                                            .addComponent(radio2)
+                                            .addComponent(radio3)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(65, 65, 65)
+                                        .addComponent(btnaudio)))))))
                 .addContainerGap(80, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -162,25 +175,27 @@ public class Preguntas extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(34, Short.MAX_VALUE)
                 .addComponent(lblPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblImagenSalida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(radio1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(radio2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(radio3)
-                                .addGap(38, 38, 38)
-                                .addComponent(btnsiguinete, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(lblImagenSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(258, 258, 258)
-                        .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(19, 19, 19)
+                        .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(btnaudio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(radio1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(radio2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(radio3)
+                        .addGap(52, 52, 52)
+                        .addComponent(btnsiguinete, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(32, 32, 32)
                 .addComponent(btnSalirjuego, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -257,7 +272,8 @@ public class Preguntas extends javax.swing.JFrame {
         }
         ramdonPreguntas(num,n);
         
-        
+//        audio(numero);
+       
         
     }//GEN-LAST:event_btnsiguineteActionPerformed
 
@@ -275,7 +291,31 @@ public class Preguntas extends javax.swing.JFrame {
 //        System.out.println("contador"+sum);
           Acumulador();
     }//GEN-LAST:event_radio1ActionPerformed
-              public void Acumulador() {
+
+    private void btnaudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaudioActionPerformed
+//        audio(1);
+        Random a=new Random();
+        int numero;
+        numero=(a.nextInt(10-1)); 
+        if (numero==0) {
+            numero=numero+1; 
+        }
+        System.out.println("audio"+numero);
+        AudioClip audio;
+        audio=java.applet.Applet.newAudioClip(getClass().getResource("/AudiosJuego/"+numero+".wav")) ;
+        audio.play();
+    }//GEN-LAST:event_btnaudioActionPerformed
+              
+//    public  AudioClip audio(int a){
+//        AudioClip audio;
+//        audio=java.applet.Applet.newAudioClip(getClass().getResource("/AudiosJuego/"+a+".m4a")) ;
+//        audio.play();
+//        return audio;
+//    }
+    
+ 
+    
+    public void Acumulador() {
 	
 		int[] lista = new int[100]; // Lista de números enteros que supondremos llena.
 		int acumulador = 0; // Declaramos e inicializamos el acumulaador.
@@ -328,6 +368,7 @@ public class Preguntas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnSalirjuego;
+    private javax.swing.JButton btnaudio;
     private javax.swing.JButton btnsiguinete;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel jPanel1;

@@ -241,10 +241,16 @@ public class InicioUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnjuegosActionPerformed
 
     private void btnestadisticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnestadisticaActionPerformed
-//       EstadisticaUsuario estadistica=new EstadisticaUsuario();
-       Estju estadistica=new Estju();
-       this.setVisible(false);
-        estadistica.setVisible(true);
+       EstadisticaUsuario estadistica=new EstadisticaUsuario();
+//       Estju estadistica=new Estju();
+//       this.setVisible(false);
+//        estadistica.setVisible(true);
+        estadistica.setSize(479, 488);
+       estadistica.setLocation(5, 5);
+       Contenedor.removeAll();
+       Contenedor.add(estadistica,BorderLayout.CENTER);
+       Contenedor.revalidate();
+       Contenedor.repaint();
     }//GEN-LAST:event_btnestadisticaActionPerformed
 
     private void btnatrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnatrasActionPerformed
