@@ -95,7 +95,8 @@ public class EstadisticaUsuario extends javax.swing.JPanel {
         add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, -1, -1));
 
         lblporcentaje.setBackground(new java.awt.Color(0, 0, 0));
-        add(lblporcentaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, 80, 30));
+        lblporcentaje.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        add(lblporcentaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 80, 30));
 
         bprogress.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bprogress.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -163,53 +164,6 @@ public class EstadisticaUsuario extends javax.swing.JPanel {
                 System.err.println(ex.toString());
             }
         
-       
-//        String campo = txtCampo.getText();
-//        String where = "";
-//        if (!"".equals(campo)) {
-//            where = "WHERE usuarioJ = '" + campo + "'";
-//            try {
-//                DefaultTableModel modelo = new DefaultTableModel();
-//                jtEstadistica.setModel(modelo);
-//
-//                PreparedStatement ps = null;
-//                ResultSet rs = null;
-//                Connection conn = con.getCon();
-//
-//                String sql = "SELECT codJuego, Dificultad, usuarioJ, estadistica FROM juego " + where;
-//                System.out.println(sql);
-//                ps = conn.prepareStatement(sql);
-//                rs = ps.executeQuery();
-//                
-//                int porcent=Integer.parseInt(rs.getString("estadistica"));
-//                lblporcentBADA.setText(String.valueOf(porcent));
-//
-//                ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
-//                int cantidadColumnas = rsMd.getColumnCount();
-//
-//                modelo.addColumn("Código");
-//                modelo.addColumn("Dificultad");
-//                modelo.addColumn("Usuario");
-//                modelo.addColumn("Estadistica");
-//                int[] anchos = {50, 200, 50, 50};
-//                for (int i = 0; i < jtEstadistica.getColumnCount(); i++) {
-//                    jtEstadistica.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
-//                }
-//
-//                while (rs.next()) {
-//                    Object[] filas = new Object[cantidadColumnas];
-//                    for (int i = 0; i < cantidadColumnas; i++) {
-//                        filas[i] = rs.getObject(i + 1);
-//                    }
-//                    modelo.addRow(filas);
-//                }
-//
-//            } catch (Exception ex) {
-//                System.err.println(ex.toString());
-//            }
-//        }else{
-//            JOptionPane.showMessageDialog(null, "Ingrese un usuario para buscar");
-//        }
         ingresarvalor();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -236,7 +190,7 @@ public class EstadisticaUsuario extends javax.swing.JPanel {
     }//GEN-LAST:event_jtEstadisticaMouseClicked
 
     private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed
-        
+       ingresarvalor();
     }//GEN-LAST:event_btningresarActionPerformed
 
 
@@ -258,7 +212,7 @@ public class EstadisticaUsuario extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     public void ingresarvalor(){
-        double valor=Integer.parseInt(lblporcentBADA.getText());
+        int valor=Integer.parseInt(txtvalor.getText());
         bprogress.setValue((int) valor);
         lblporcentaje.setText(valor+"%");
     }

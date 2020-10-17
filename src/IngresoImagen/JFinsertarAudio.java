@@ -24,28 +24,28 @@ public class JFinsertarAudio extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
 //        this.setTitle("INGRESO DE AUDIOS");
-        grabarimagenes();
+//        grabarimagenes();
     }
 
-    public void grabarimagenes(){
-        try {
-            String sql="SELECT codImagen FROM imagen";
-            ResultSet rs=conecta.query(sql);
-            cmbBox.removeAllItems();
-            
-            while (rs.next()) {
-                
-                try {
-                    cmbBox.addItem(rs.getString(1));
-                } catch (SQLException ex) {
-                    Logger.getLogger(JFinsertarAudio.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(JFinsertarAudio.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
+//    public void grabarimagenes(){
+//        try {
+//            String sql="SELECT codImagen FROM imagen";
+//            ResultSet rs=conecta.query(sql);
+//            cmbBox.removeAllItems();
+//            
+//            while (rs.next()) {
+//                
+//                try {
+//                    cmbBox.addItem(rs.getString(1));
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(JFinsertarAudio.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(JFinsertarAudio.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -72,7 +72,7 @@ public class JFinsertarAudio extends javax.swing.JFrame {
         txtcodpregunta = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        cmbBox = new javax.swing.JComboBox<>();
+        txtcodimagen = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -161,8 +161,7 @@ public class JFinsertarAudio extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Codigo Pregunta");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
-
-        jPanel1.add(cmbBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 140, -1));
+        jPanel1.add(txtcodimagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 130, 30));
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IngresoImagen/FondoImagen.png"))); // NOI18N
@@ -213,7 +212,7 @@ public class JFinsertarAudio extends javax.swing.JFrame {
     private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar1ActionPerformed
         String codpregunta=txtcodpregunta.getText();
         String pregunta=txtpregunta.getText();
-        String codImagen=vo.getCodImagen();
+        String codImagen=txtcodimagen.getText();
         String respuesta=txtrespuesta.getText();
         File ruta=new File(txtruta.getText());
         agregar(codpregunta, pregunta, codImagen, respuesta, ruta);
@@ -227,34 +226,33 @@ public class JFinsertarAudio extends javax.swing.JFrame {
       txtpregunta.setText("");
       txtrespuesta.setText("");
       txtruta.setText("");
+      txtcodimagen.setText("");
     }
     
-    public int combxpregunta(){
-        try {
-            String sql="SELECT COUNT(codImagen) FROM imagen";
-            ResultSet rs=conecta.query(sql);
-            String a=rs.getString("codImagen");
-            int b=Integer.valueOf(a);
-            System.out.println(b);
-            for (int num = 0; num <=b; num++) {
-                if(num==cmbBox.getSelectedIndex()) {
-                    return num;
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(JFinsertarAudio.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return 0;
-    }
+//    public int combxpregunta(){
+//        try {
+//            String sql="SELECT COUNT(codImagen) FROM imagen";
+//            ResultSet rs=conecta.query(sql);
+//            String a=rs.getString("codImagen");
+//            int b=Integer.valueOf(a);
+//            System.out.println(b);
+//            for (int num = 0; num <=b; num++) {
+//                if(num==cmbBox.getSelectedIndex()) {
+//                    return num;
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(JFinsertarAudio.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return 0;
+//    }
     public void agregar(String codpregunta,String pregunta,String codImagen,String respuesta, File ruta){
         
         dao=new AudioIA();
         vo.setCodigoPregunta(Integer.parseInt(codpregunta));
         vo.setPregunta(pregunta);
         vo.setCodImagen(codImagen);
-        vo.setRespuesta(respuesta);
-        vo.setCodImagen(String.valueOf(combxpregunta()));
-        
+        vo.setRespuesta(respuesta);        
                
         try {
             byte[] audio=new byte[(int) ruta.length()];
@@ -308,7 +306,6 @@ public class JFinsertarAudio extends javax.swing.JFrame {
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnlimpiar;
     private javax.swing.JButton btnvoz;
-    private javax.swing.JComboBox<String> cmbBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -317,6 +314,7 @@ public class JFinsertarAudio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField txtcodimagen;
     private javax.swing.JTextField txtcodpregunta;
     private javax.swing.JTextField txtnombreaudio;
     private javax.swing.JTextField txtpregunta;

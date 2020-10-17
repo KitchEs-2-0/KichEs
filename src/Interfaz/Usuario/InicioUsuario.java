@@ -27,6 +27,9 @@ public class InicioUsuario extends javax.swing.JFrame {
  FondoPanel a=new FondoPanel();
     ConexionBADA conecto=new ConexionBADA();
     DatosUsuario datos=new DatosUsuario();
+    
+    
+    
     public InicioUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -242,10 +245,7 @@ public class InicioUsuario extends javax.swing.JFrame {
 
     private void btnestadisticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnestadisticaActionPerformed
        EstadisticaUsuario estadistica=new EstadisticaUsuario();
-//       Estju estadistica=new Estju();
-//       this.setVisible(false);
-//        estadistica.setVisible(true);
-        estadistica.setSize(479, 488);
+       estadistica.setSize(479, 488);
        estadistica.setLocation(5, 5);
        Contenedor.removeAll();
        Contenedor.add(estadistica,BorderLayout.CENTER);
@@ -254,9 +254,7 @@ public class InicioUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnestadisticaActionPerformed
 
     private void btnatrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnatrasActionPerformed
-        TraductorlogIn login=new TraductorlogIn();
-        login.setVisible(true);       
-        this.dispose();
+        enviardatos();
         
     }//GEN-LAST:event_btnatrasActionPerformed
 
@@ -307,4 +305,33 @@ public class InicioUsuario extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lblUsuarioJ;
     // End of variables declaration//GEN-END:variables
+
+    public void enviardatos(){
+        
+         try {
+            TraductorlogIn tl=new TraductorlogIn();
+            tl.setVisible(true);
+            this.dispose();
+            System.out.println(lblUsuarioJ.getText());
+            String sql="SELECT usuario, Nombre, apellido FROM persona WHERE usuario LIKE'"+lblUsuarioJ.getText()+"'";
+            ResultSet rs=conecto.query(sql);
+            if(rs.next()){
+                
+                String usuario=rs.getString("usuario");
+                String nombre=rs.getString("Nombre");
+                String apel=rs.getString("apellido");
+                
+                String b=nombre+" "+apel;
+                System.out.println(b);
+                
+                System.out.println(usuario);
+                tl.lblusuarioT.setText(usuario);
+                tl.lblnombresUT.setText(b);
+                
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TraductorlogIn.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
