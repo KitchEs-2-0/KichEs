@@ -27,6 +27,8 @@ public class InicioUsuario extends javax.swing.JFrame {
  FondoPanel a=new FondoPanel();
     ConexionBADA conecto=new ConexionBADA();
     DatosUsuario datos=new DatosUsuario();
+     JuegosUsuario juegos=new JuegosUsuario();
+     EstadisticaUsuario estadistica=new EstadisticaUsuario();
     
     
     
@@ -35,6 +37,8 @@ public class InicioUsuario extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
     }
+    
+
 
     class FondoPanel extends JPanel{
         private Image imagen;
@@ -220,6 +224,20 @@ public class InicioUsuario extends javax.swing.JFrame {
         }
             
     }
+    
+    public void usuariojuego(){
+        
+           String usua=lblUsuarioJ.getText();
+           juegos.lblusuarioirJ.setText(usua);
+
+    }
+    
+    public void usuariojuegoEst(){
+        
+           String usua=lblUsuarioJ.getText();
+           estadistica.lblusuarioEs.setText(usua);
+    }
+    
     private void bntperfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntperfilActionPerformed
         
        
@@ -233,24 +251,25 @@ public class InicioUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_bntperfilActionPerformed
 
     private void btnjuegosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnjuegosActionPerformed
-       JuegosUsuario juegos=new JuegosUsuario();
-       
+
        juegos.setSize(479, 488);
        juegos.setLocation(5, 5);
        Contenedor.removeAll();
        Contenedor.add(juegos,BorderLayout.CENTER);
        Contenedor.revalidate();
        Contenedor.repaint();
+       usuariojuego();
     }//GEN-LAST:event_btnjuegosActionPerformed
 
     private void btnestadisticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnestadisticaActionPerformed
-       EstadisticaUsuario estadistica=new EstadisticaUsuario();
+       
        estadistica.setSize(479, 488);
        estadistica.setLocation(5, 5);
        Contenedor.removeAll();
        Contenedor.add(estadistica,BorderLayout.CENTER);
        Contenedor.revalidate();
        Contenedor.repaint();
+       usuariojuegoEst();
     }//GEN-LAST:event_btnestadisticaActionPerformed
 
     private void btnatrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnatrasActionPerformed
@@ -262,6 +281,7 @@ public class InicioUsuario extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -334,4 +354,5 @@ public class InicioUsuario extends javax.swing.JFrame {
             Logger.getLogger(TraductorlogIn.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }

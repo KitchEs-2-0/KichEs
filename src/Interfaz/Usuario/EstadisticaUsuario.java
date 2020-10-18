@@ -13,6 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -43,24 +45,24 @@ public class EstadisticaUsuario extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
         jTextField1 = new javax.swing.JTextField();
-        txtCampo = new javax.swing.JTextField();
+        lblporcentaje = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtEstadistica = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
-        lblporcentaje = new javax.swing.JLabel();
         bprogress = new javax.swing.JProgressBar();
-        txtvalor = new javax.swing.JTextField();
-        btningresar = new javax.swing.JButton();
+        lblusuarioEs = new javax.swing.JLabel();
         lblporcentBADA = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblufondo = new javax.swing.JLabel();
 
         jScrollPane2.setViewportView(jTree1);
 
         jTextField1.setText("jTextField1");
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(txtCampo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 200, -1));
+
+        lblporcentaje.setBackground(new java.awt.Color(0, 0, 0));
+        lblporcentaje.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        add(lblporcentaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 110, 30));
 
         jtEstadistica.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -82,40 +84,28 @@ public class EstadisticaUsuario extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 420, 97));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setText("Usuario:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
-
-        btnBuscar.setText("Buscar");
+        btnBuscar.setText("MOSTRAR DATOS Y ESTADISTICAS");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
             }
         });
-        add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, -1, -1));
+        add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 300, -1));
 
-        lblporcentaje.setBackground(new java.awt.Color(0, 0, 0));
-        lblporcentaje.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        add(lblporcentaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 80, 30));
-
-        bprogress.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bprogress.setBackground(new java.awt.Color(255, 51, 51));
+        bprogress.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
         bprogress.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         add(bprogress, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 420, 40));
-        add(txtvalor, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 60, -1));
 
-        btningresar.setText("Ingresar valor");
-        btningresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btningresarActionPerformed(evt);
-            }
-        });
-        add(btningresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 110, 30));
+        lblusuarioEs.setForeground(new java.awt.Color(255, 255, 255));
+        add(lblusuarioEs, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 90, 20));
 
+        lblporcentBADA.setForeground(new java.awt.Color(255, 255, 255));
         lblporcentBADA.setText("jLabel2");
-        add(lblporcentBADA, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 244, 80, 20));
+        add(lblporcentBADA, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 20, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/pantallaEstadistica.png"))); // NOI18N
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 490));
+        lblufondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/pantallaEstadistica.png"))); // NOI18N
+        add(lblufondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 490));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -131,20 +121,18 @@ public class EstadisticaUsuario extends javax.swing.JPanel {
                 ResultSet rs = null;
                 Connection conn = con.getCon();
                 String b="baja";
-                String sql = "SELECT codJuego, Dificultad, usuarioJ, estadistica FROM juego WHERE usuarioJ LIKE 'KevinAche' AND Dificultad LIKE '"+b+"'";
+                String sql = "SELECT codJuego,codPreguntas, usuarioJ, estadistica FROM juego WHERE usuarioJ LIKE '"+lblusuarioEs.getText()+"'";
                 System.out.println(sql);
                 ps = conn.prepareStatement(sql);
                 rs = ps.executeQuery();
                 
-                String porcent=rs.getString("estadistica");
-                System.out.println(porcent);
-                lblporcentBADA.setText(porcent);
+
 
                 ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
                 int cantidadColumnas = rsMd.getColumnCount();
 
                 modelo.addColumn("Código");
-                modelo.addColumn("Dificultad");
+                modelo.addColumn("Preguntas");
                 modelo.addColumn("Usuario");
                 modelo.addColumn("Estadistica");
                 int[] anchos = {50, 200, 50, 50};
@@ -163,43 +151,19 @@ public class EstadisticaUsuario extends javax.swing.JPanel {
             } catch (Exception ex) {
                 System.err.println(ex.toString());
             }
-        
-        ingresarvalor();
+            
+            porcentaje();
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void jtEstadisticaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtEstadisticaMouseClicked
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            //            Conexion objCon = new Conexion();
-            Connection conn = con.getCon();
-
-            int Fila = jtEstadistica.getSelectedRow();
-            String usuarioJ = jtEstadistica.getValueAt(Fila, 3).toString();
-
-            ps = conn.prepareStatement("SELECT codJuego, Dificultad, usuarioJ, estadistica FROM juego WHERE usuarioJ=?");
-            ps.setString(1, usuarioJ);
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.toString());
-        }
+      
     }//GEN-LAST:event_jtEstadisticaMouseClicked
-
-    private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed
-       ingresarvalor();
-    }//GEN-LAST:event_btningresarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JProgressBar bprogress;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btningresar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
@@ -207,14 +171,62 @@ public class EstadisticaUsuario extends javax.swing.JPanel {
     private javax.swing.JTable jtEstadistica;
     private javax.swing.JLabel lblporcentBADA;
     private javax.swing.JLabel lblporcentaje;
-    private javax.swing.JTextField txtCampo;
-    private javax.swing.JTextField txtvalor;
+    private javax.swing.JLabel lblufondo;
+    public javax.swing.JLabel lblusuarioEs;
     // End of variables declaration//GEN-END:variables
 
     public void ingresarvalor(){
-        int valor=Integer.parseInt(txtvalor.getText());
+        int valor=Integer.parseInt(lblporcentBADA.getText());
         bprogress.setValue((int) valor);
         lblporcentaje.setText(valor+"%");
+    }
+    
+    public void porcentaje(){
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            Connection conn = con.getCon();
+            String sql = "SELECT  estadistica FROM juego WHERE usuarioJ LIKE '"+lblusuarioEs.getText()+"'";
+            System.out.println(sql);
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            int suma=0;
+            
+            while(rs.next()){ 
+               int p=rs.getInt("estadistica");
+                suma =suma+p;
+                System.out.println(suma);
+            }
+            
+            PreparedStatement ps1=null;
+            ResultSet rs1 = null;
+            String sql1 = "SELECT COUNT(estadistica) AS Total FROM juego WHERE usuarioJ LIKE '"+lblusuarioEs.getText()+"'";
+            System.out.println(sql1);
+            ps1= conn.prepareStatement(sql1);
+            rs1 = ps1.executeQuery();
+            int total=0;
+            while(rs1.next()){
+                total=rs1.getInt("Total");
+            }
+            if (total==0) {
+                JOptionPane.showMessageDialog(null, "El usuario no resgistra ninugn datos");
+                
+            }else{
+                System.out.println("total "+total);
+                System.out.println("Suma "+suma);
+                int porcentaje=((suma*100)/(total*100));
+                System.out.println(porcentaje);
+            
+                lblporcentBADA.setText(String.valueOf(porcentaje));
+                ingresarvalor(); 
+            }
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EstadisticaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

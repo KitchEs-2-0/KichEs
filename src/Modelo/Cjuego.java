@@ -10,19 +10,29 @@ package Modelo;
  * @author ASUS
  */
 public class Cjuego {
-    private String codJuegoC;
+    private int codJuegoC;
     private String dificultadC;
     private String codPreguntasC;
     private String codUsuarioC;
+    private int porcentaje;
 
     public Cjuego() {
     }
 
-    public String getCodJuegoC() {
+    public int getPorcentaje() {
+        return porcentaje;
+    }
+
+    public void setPorcentaje(int porcentaje) {
+        this.porcentaje = porcentaje;
+    }
+
+    
+    public int getCodJuegoC() {
         return codJuegoC;
     }
 
-    public void setCodJuegoC(String codJuegoC) {
+    public void setCodJuegoC(int codJuegoC) {
         this.codJuegoC = codJuegoC;
     }
 
