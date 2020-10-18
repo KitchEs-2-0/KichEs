@@ -49,12 +49,21 @@ public class Preguntas extends JFrame{
         
         initComponents();
         this.setLocationRelativeTo(null);
+        btnsiguinete.setEnabled(false);
         this.setTitle("YUPAYKUNA--LOS NUMEROS");
         for (int i = 1; i <11; i++) {
             imagen1[i]=new ImageIcon(getClass().getResource("/ImagenesJuegoN1/Numero"+i+".png")); 
         }
             lblImagenSalida.setIcon(imagen1[1]);
        
+    }
+    
+    public void habilitarboton(){
+        if (lblp1.getText()!=" ") {
+            btnsiguinete.setEnabled(true);
+            btnIniciar.setEnabled(false);
+        }
+    
     }
     
     
@@ -95,19 +104,18 @@ public class Preguntas extends JFrame{
         radio2 = new javax.swing.JRadioButton();
         radio1 = new javax.swing.JRadioButton();
         radio3 = new javax.swing.JRadioButton();
-        btnSalirjuego = new javax.swing.JButton();
         btnIniciar = new javax.swing.JButton();
         lblImagenSalida = new javax.swing.JLabel();
-        btnaudio = new javax.swing.JButton();
         lblp1 = new javax.swing.JLabel();
         lblp2 = new javax.swing.JLabel();
         lblp3 = new javax.swing.JLabel();
         lblusuario = new javax.swing.JLabel();
-        lblclicks = new javax.swing.JLabel();
         lblcorrecto = new javax.swing.JLabel();
         lblincorrecto = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(204, 255, 255));
@@ -116,8 +124,7 @@ public class Preguntas extends JFrame{
         jPanel1.setPreferredSize(new java.awt.Dimension(850, 513));
 
         lblPreguntas.setBackground(new java.awt.Color(0, 0, 0));
-        lblPreguntas.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lblPreguntas.setForeground(new java.awt.Color(255, 255, 255));
+        lblPreguntas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblPreguntas.setText("Pregunta");
 
         btnsiguinete.setText("Siguiente");
@@ -146,13 +153,6 @@ public class Preguntas extends JFrame{
         buttonGroup1.add(radio3);
         radio3.setText("Palabra3");
 
-        btnSalirjuego.setText("Salir");
-        btnSalirjuego.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirjuegoActionPerformed(evt);
-            }
-        });
-
         btnIniciar.setText("Iniciar");
         btnIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,14 +160,11 @@ public class Preguntas extends JFrame{
             }
         });
 
-        btnaudio.setText("Audio");
-        btnaudio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnaudioActionPerformed(evt);
+        lblp1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                lblp1KeyReleased(evt);
             }
         });
-
-        lblp1.setForeground(new java.awt.Color(255, 255, 255));
 
         lblp2.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -175,82 +172,77 @@ public class Preguntas extends JFrame{
 
         lblusuario.setText("jLabel1");
 
-        lblclicks.setText("0");
-
+        lblcorrecto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblcorrecto.setText("0");
 
+        lblincorrecto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblincorrecto.setText("0");
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Correctas");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Incorrectas");
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/q1.png"))); // NOI18N
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/q2.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(97, 97, 97)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblcorrecto)
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblincorrecto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 361, Short.MAX_VALUE)
+                        .addComponent(lblusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(91, 91, 91))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(666, 666, 666)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblp3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(lblp1)
-                                .addComponent(lblp2))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(94, 94, 94)
-                                .addComponent(lblImagenSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(76, 76, 76)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(radio3)
-                                                    .addComponent(radio1)
-                                                    .addComponent(radio2)))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(65, 65, 65)
-                                                .addComponent(btnaudio)))
-                                        .addGap(67, 67, 67))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnsiguinete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btnSalirjuego, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(109, 109, 109)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblcorrecto)
-                                .addGap(42, 42, 42)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblincorrecto)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(77, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                                .addComponent(lblp2))))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(lblPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblclicks))
+                        .addGap(35, 35, 35)
+                        .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81)
+                        .addComponent(lblImagenSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(76, 76, 76)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(radio3)
+                                    .addComponent(radio1)
+                                    .addComponent(radio2)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(btnsiguinete, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(163, 163, 163)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(lblclicks)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -258,68 +250,66 @@ public class Preguntas extends JFrame{
                         .addComponent(lblincorrecto)
                         .addComponent(lblcorrecto)
                         .addComponent(jLabel1)
-                        .addComponent(jLabel2))
+                        .addComponent(jLabel2)
+                        .addComponent(lblusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblp1))
+                .addGap(46, 46, 46)
+                .addComponent(lblp2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblp3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(lblp2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblp3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                        .addComponent(lblPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(btnaudio)
-                        .addGap(61, 61, 61)
+                    .addComponent(lblPreguntas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(radio1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(radio2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(radio3)
-                        .addGap(34, 34, 34)
+                        .addGap(100, 100, 100)
                         .addComponent(btnsiguinete, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSalirjuego, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(69, 69, 69))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblImagenSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(61, 61, 61))))))
+                        .addGap(42, 42, 42))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblImagenSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(61, 61, 61))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 907, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 887, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnSalirjuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirjuegoActionPerformed
-       usuariosalir();
-    }//GEN-LAST:event_btnSalirjuegoActionPerformed
 
     private void btnsiguineteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsiguineteActionPerformed
         validaRadios();
     }//GEN-LAST:event_btnsiguineteActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-//       
-         int numero=0;
-        lblImagenSalida.setIcon(imagen1[numero]);
+        siguiente();
+        habilitarboton();
+//        String a=lblp1.getText();
+//        System.out.println(a);
+//       if(a.equals(radio1.getText()) || a.equals(radio2.getText()) || a.equals(radio3.getText())|| a.equals("")){
+//           btnIniciar.enable(true);
+        
+//       }
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void radio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio1ActionPerformed
@@ -331,26 +321,13 @@ public class Preguntas extends JFrame{
 //          Acumulador();
     }//GEN-LAST:event_radio1ActionPerformed
 
-    private void btnaudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaudioActionPerformed
-//        audio(1);
-        Random a=new Random();
-        int numero;
-        numero=(a.nextInt(10-1)); 
-        if (numero==0) {
-            numero=numero+1; 
-        }
-        System.out.println("audio"+numero);
-        AudioClip audio;
-        audio=java.applet.Applet.newAudioClip(getClass().getResource("/AudiosJuego/"+numero+".wav")) ;
-        audio.play();
-    }//GEN-LAST:event_btnaudioActionPerformed
-
-    private int count=0;
     private void btnsiguineteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsiguineteMouseClicked
-        count++;
-        String numero=String.valueOf(count);
-        lblclicks.setText(numero);
+  
     }//GEN-LAST:event_btnsiguineteMouseClicked
+
+    private void lblp1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblp1KeyReleased
+        habilitarboton();
+    }//GEN-LAST:event_lblp1KeyReleased
               
 //    public  AudioClip audio(int a){
 //        AudioClip audio;
@@ -397,16 +374,15 @@ public class Preguntas extends JFrame{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciar;
-    private javax.swing.JButton btnSalirjuego;
-    private javax.swing.JButton btnaudio;
     private javax.swing.JButton btnsiguinete;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     public static javax.swing.JLabel lblImagenSalida;
     public javax.swing.JLabel lblPreguntas;
-    private javax.swing.JLabel lblclicks;
     private javax.swing.JLabel lblcorrecto;
     private javax.swing.JLabel lblincorrecto;
     private javax.swing.JLabel lblp1;
@@ -452,10 +428,10 @@ public class Preguntas extends JFrame{
                   int n=0,num=0;
                 while (n==num) { 
                     Random r=new Random();
-                    num=(r.nextInt(20)+1); 
+                    num=(r.nextInt(40)+1); 
         
                     Random a=new Random();
-                    n=(a.nextInt(20)+1); 
+                    n=(a.nextInt(40)+1); 
 
                     }
                     
@@ -465,7 +441,7 @@ public class Preguntas extends JFrame{
                     ex.getMessage();
                 }
             }
-            
+            audio(numero);
             RandomPregunta();
         lblImagenSalida.setIcon(imagen1[numero]);
         click();
@@ -473,19 +449,26 @@ public class Preguntas extends JFrame{
     
     public void ramdonPreguntas(int num1, int num2){
         Map<Integer, String> treeMap = new TreeMap<Integer, String>();
-            treeMap.put(1, "PICHKA CHUNKA");        treeMap.put(7, "CHUSKU CHUNKA");
-            treeMap.put(2, "PATSAK");               treeMap.put(8, "CHUNKA PUSAK");
-            treeMap.put(3, "HUNU");                 treeMap.put(9, "PUSAK PATSAK");
-            treeMap.put(4, "SUKTA PATSAK");         treeMap.put(10, "CHUNKA SHUK");
-            treeMap.put(5, "WARANKA");              treeMap.put(11, "TAWA CHUNKA");
-            treeMap.put(6,"CHUSKU PATSAK");
-            treeMap.put(12, "SUKTA CHUNKA");        treeMap.put(18, "CHUNKA PISQAYOP");
-            treeMap.put(13, "CHUNKA PUSAK");        treeMap.put(19, "QANCHIS CHUNKA");
-            treeMap.put(14, "ISHKAY CHUNKA");       treeMap.put(20, "PUSAQ CHUNKA");
-            treeMap.put(15, "PUSAK CHUNKA");          
-            treeMap.put(16, "CHUNKA SHUK");         
-            treeMap.put(17,"KIMSA PATSAK");
-                
+            treeMap.put(1, "PICHKA CHUNKA");        treeMap.put(21, "ALLPA");
+            treeMap.put(2, "PATSAK");               treeMap.put(22, "ALLI");
+            treeMap.put(3, "HUNU");                 treeMap.put(23, "KAY");
+            treeMap.put(4, "SUKTA PATSAK");         treeMap.put(24, "KIKIN");
+            treeMap.put(5, "WARANKA");              treeMap.put(25, "MUNANA");
+            treeMap.put(6,"CHUSKU PATSAK");         treeMap.put(26, "PANI");
+            treeMap.put(12, "SUKTA CHUNKA");        treeMap.put(27, "YAKU");
+            treeMap.put(13, "CHUNKA PUSAK");        treeMap.put(28, "NINA");
+            treeMap.put(14, "ISHKAY CHUNKA");       treeMap.put(29, "TUTA");
+            treeMap.put(15, "PUSAK CHUNKA");        treeMap.put(30, "PUNCHA"); 
+            treeMap.put(16, "CHUNKA SHUK");         treeMap.put(31, "SISA");
+            treeMap.put(17,"KIMSA PATSAK");         treeMap.put(32, "CHASKA");
+            treeMap.put(7, "CHUSKU CHUNKA");        treeMap.put(33, "RINRI");
+            treeMap.put(8, "CHUNKA PUSAK");         treeMap.put(34, "CHAQUI");
+            treeMap.put(9, "PUSAK PATSAK");         treeMap.put(35, "SHIWI");
+            treeMap.put(10, "CHUNKA SHUK");         treeMap.put(36, "TIKRANA");
+            treeMap.put(11, "TAWA CHUNKA");         treeMap.put(37, "TAKARINA");
+            treeMap.put(18, "CHUNKA PISQAYOP");     treeMap.put(38, "SIMI");
+            treeMap.put(19, "QANCHIS CHUNKA");      treeMap.put(39, "SUMAK");
+            treeMap.put(20, "PUSAQ CHUNKA");        treeMap.put(40, "UKU");
                     
                     Iterator<Integer> it = treeMap.keySet().iterator();
                     while(it.hasNext()){
@@ -522,6 +505,7 @@ public class Preguntas extends JFrame{
             
             
             if (a.equals(cad)){ 
+               
                 System.out.println("correcto");
                 int correct=Integer.parseInt(lblcorrecto.getText());
                 int cont=correct+1;
@@ -533,7 +517,7 @@ public class Preguntas extends JFrame{
                 int cont1=incorrect+1;
                 lblincorrecto.setText(String.valueOf(cont1));
             
-         limpiarradio();
+//         limpiarradio();
         }
          
         siguiente();
@@ -580,12 +564,12 @@ public class Preguntas extends JFrame{
         
     }
     
-    public void limpiarradio(){
-        radio1.removeAll();
-        radio2.removeAll();
-        radio3.removeAll();
-       
-    }
+//    public void limpiarradio(){
+//        radio1.removeAll();
+//        radio2.removeAll();
+//        radio3.removeAll();
+//       
+//    }
     
     public void click(){
         int correcto=Integer.parseInt(lblcorrecto.getText());
@@ -620,4 +604,11 @@ public class Preguntas extends JFrame{
        }
    } 
     
+   public void audio(int numero){
+       AudioClip audio;
+        audio=java.applet.Applet.newAudioClip(getClass().getResource("/AudiosJuego/"+numero+".wav")) ;
+        audio.play();
+   }
+   
+   
 }
