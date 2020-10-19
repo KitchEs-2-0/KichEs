@@ -35,10 +35,14 @@ public class JuegosUsuario extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         btnirjuego = new javax.swing.JButton();
         lblusuarioirJ = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         jRadioButton1.setText("jRadioButton1");
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/3613527513_40e75848-dfdc-4124-af21-1560b279d45c.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 313, 258));
 
         btnirjuego.setText("IR AL JUEGO");
         btnirjuego.addActionListener(new java.awt.event.ActionListener() {
@@ -46,35 +50,11 @@ public class JuegosUsuario extends javax.swing.JPanel {
                 btnirjuegoActionPerformed(evt);
             }
         });
+        jPanel1.add(btnirjuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 158, 78));
+        jPanel1.add(lblusuarioirJ, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 42, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblusuarioirJ, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(198, 198, 198)
-                        .addComponent(btnirjuego, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(169, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblusuarioirJ)
-                .addGap(21, 21, 21)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(btnirjuego, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/FondoJuegos.jpg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 490));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -99,6 +79,7 @@ public class JuegosUsuario extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnirjuego;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton1;

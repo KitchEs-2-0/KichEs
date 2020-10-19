@@ -99,7 +99,7 @@ public class LogIn extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("¿No tienes cuenta? Registrate ");
+        jLabel3.setText("¿No tienes cuenta? Regístrate ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

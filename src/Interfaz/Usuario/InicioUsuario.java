@@ -13,10 +13,12 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import Interfaz.*;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -71,6 +73,7 @@ public class InicioUsuario extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnatras = new javax.swing.JButton();
         lblUsuarioJ = new javax.swing.JLabel();
+        btnEliminar = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -131,7 +134,7 @@ public class InicioUsuario extends javax.swing.JFrame {
                 .addComponent(btnjuegos)
                 .addGap(70, 70, 70)
                 .addComponent(btnestadistica)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,10 +150,20 @@ public class InicioUsuario extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
+        btnatras.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnatras.setText("Atras");
         btnatras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnatrasActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnEliminar.setText("Eliminar Cuenta");
+        btnEliminar.setToolTipText("Eliminar Cuenta");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
             }
         });
 
@@ -163,17 +176,20 @@ public class InicioUsuario extends javax.swing.JFrame {
                 .addComponent(btnatras)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblUsuarioJ, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(btnatras)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(lblUsuarioJ, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblUsuarioJ, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -277,6 +293,10 @@ public class InicioUsuario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnatrasActionPerformed
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+       eliminar();
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -315,7 +335,8 @@ public class InicioUsuario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel Contenedor;
-    private javax.swing.JButton bntperfil;
+    private static javax.swing.JButton bntperfil;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnatras;
     private javax.swing.JButton btnestadistica;
     private javax.swing.JButton btnjuegos;
@@ -333,7 +354,7 @@ public class InicioUsuario extends javax.swing.JFrame {
             tl.setVisible(true);
             this.dispose();
             System.out.println(lblUsuarioJ.getText());
-            String sql="SELECT usuario, Nombre, apellido FROM persona WHERE usuario LIKE'"+lblUsuarioJ.getText()+"'";
+            String sql="SELECT usuario, Nombre, apellido FROM persona WHERE usuario LIKE '"+lblUsuarioJ.getText()+"'";
             ResultSet rs=conecto.query(sql);
             if(rs.next()){
                 
@@ -352,6 +373,34 @@ public class InicioUsuario extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             Logger.getLogger(TraductorlogIn.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+  
+    public void eliminar(){
+         int p=JOptionPane.showConfirmDialog(null, "seguro desea eliminar su cuenta ");
+        
+        if (p==0) {
+            try {
+            String sql1="DELETE FROM juego WHERE usuarioJ LIKE'"+lblUsuarioJ.getText()+"'";
+            String sql="DELETE FROM persona WHERE usuario LIKE'"+lblUsuarioJ.getText()+"'";
+            PreparedStatement a=conecto.getCon().prepareStatement(sql1);
+            PreparedStatement ab=conecto.getCon().prepareStatement(sql);
+            a.executeUpdate();
+            ab.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "El usuario ha sido eliminado");
+                    Traductor t1=new Traductor();
+                    t1.setVisible(true);
+                    this.setVisible(false);
+                } catch (SQLException ex) {
+                Logger.getLogger(DatosUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+        } else {
+            if (p==2) {
+                  JOptionPane.showMessageDialog(null, "Cancelado");
+            } else {
+            }
         }
     }
 

@@ -273,7 +273,7 @@ public class Registro extends javax.swing.JFrame {
                     if (ConfirmarContra()==true) {
                         ps.executeUpdate();
                         limpiar();
-                        JOptionPane.showMessageDialog(null, "Datos gurdados");
+                        JOptionPane.showMessageDialog(null, "Datos guardados");
                         LogIn ll=new LogIn();
                         ll.setVisible(true);
                         this.dispose();
@@ -349,7 +349,7 @@ public class Registro extends javax.swing.JFrame {
     
     public void enviarDatos(){
         if (combxEdad()==0) {
-            JOptionPane.showMessageDialog(null, "Elija un edad");
+            JOptionPane.showMessageDialog(null, "Elija una edad");
         } else {
         persona.setUsuario(txtUsuario.getText());
         persona.setContraseña(String.valueOf(contra.getPassword()));

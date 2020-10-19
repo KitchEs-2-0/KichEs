@@ -35,7 +35,7 @@ public class ConexionBADA {
            con=DriverManager.getConnection(CadenaConexion,usuarioPo, contrasena);
        } catch (SQLException ex) {
             Logger.getLogger(ConexionBADA.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("error coneccion");
+            System.out.println("Error conexión");
         }
     }
     

@@ -248,7 +248,7 @@ public class TraductorlogIn extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ingrese una palabra");
         }else{
             if (comboBox()==0) {
-            JOptionPane.showMessageDialog(null, "Elige los idimas al que desea traducir");
+            JOptionPane.showMessageDialog(null, "Elige el idioma al que desea traducir");
             } else {
                 if (comboBox()==1) {
                     Es_Ki();
@@ -283,7 +283,7 @@ public class TraductorlogIn extends javax.swing.JFrame {
             tableTrad.setModel(new javax.swing.table.DefaultTableModel(
             matriz,
             new String [] {
-                "Palabra Ingreso", "Traduccion"
+                "Palabra Ingreso", "Traducción"
             }
         ));
        

@@ -50,9 +50,9 @@ public class EstadisticaUsuario extends javax.swing.JPanel {
         jtEstadistica = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
         bprogress = new javax.swing.JProgressBar();
+        lblufondo = new javax.swing.JLabel();
         lblusuarioEs = new javax.swing.JLabel();
         lblporcentBADA = new javax.swing.JLabel();
-        lblufondo = new javax.swing.JLabel();
 
         jScrollPane2.setViewportView(jTree1);
 
@@ -62,7 +62,7 @@ public class EstadisticaUsuario extends javax.swing.JPanel {
 
         lblporcentaje.setBackground(new java.awt.Color(0, 0, 0));
         lblporcentaje.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        add(lblporcentaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 110, 30));
+        add(lblporcentaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 50, 30));
 
         jtEstadistica.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -93,9 +93,13 @@ public class EstadisticaUsuario extends javax.swing.JPanel {
         add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 300, -1));
 
         bprogress.setBackground(new java.awt.Color(255, 51, 51));
+        bprogress.setForeground(java.awt.Color.green);
         bprogress.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
         bprogress.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        add(bprogress, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 420, 40));
+        add(bprogress, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 420, 50));
+
+        lblufondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/FondoEstadistica.jpeg"))); // NOI18N
+        add(lblufondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 490));
 
         lblusuarioEs.setForeground(new java.awt.Color(255, 255, 255));
         add(lblusuarioEs, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 90, 20));
@@ -103,9 +107,6 @@ public class EstadisticaUsuario extends javax.swing.JPanel {
         lblporcentBADA.setForeground(new java.awt.Color(255, 255, 255));
         lblporcentBADA.setText("jLabel2");
         add(lblporcentBADA, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 20, -1));
-
-        lblufondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/pantallaEstadistica.png"))); // NOI18N
-        add(lblufondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 490));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -210,7 +211,7 @@ public class EstadisticaUsuario extends javax.swing.JPanel {
                 total=rs1.getInt("Total");
             }
             if (total==0) {
-                JOptionPane.showMessageDialog(null, "El usuario no resgistra ninugn datos");
+                JOptionPane.showMessageDialog(null, "El usuario no registra datos");
                 
             }else{
                 System.out.println("total "+total);

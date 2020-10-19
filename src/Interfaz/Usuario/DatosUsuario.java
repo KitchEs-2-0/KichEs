@@ -40,54 +40,45 @@ public class DatosUsuario extends javax.swing.JPanel {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
         lbledad = new javax.swing.JLabel();
-        btnEliminar = new javax.swing.JButton();
-        btnmodificarcontaseña = new javax.swing.JButton();
+        jLabel23 = new javax.swing.JLabel();
         btnmodificarnombre = new javax.swing.JButton();
-        jLabel24 = new javax.swing.JLabel();
+        btnmodificarcontaseña = new javax.swing.JButton();
         lblpassword = new javax.swing.JLabel();
-        btnmodificaredad = new javax.swing.JButton();
+        jLabel24 = new javax.swing.JLabel();
         lblusuario = new javax.swing.JLabel();
+        btnmodificaredad = new javax.swing.JButton();
         lblnombre = new javax.swing.JLabel();
         lblapellido = new javax.swing.JLabel();
         btnmodificarapellido = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setText("Datos Usuario");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, -1));
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel20.setText("Usuario");
+        jLabel20.setText("Usuario:");
+        add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 58, 24));
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel21.setText("Nombre");
+        jLabel21.setText("Nombre:");
+        add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 70, 24));
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel22.setText("Apellido");
+        jLabel22.setText("Apellido:");
+        add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 70, 24));
+
+        lbledad.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbledad.setText("Edad");
+        add(lbledad, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel23.setText("Contraseña");
-
-        lbledad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbledad.setText("Edad");
-
-        btnEliminar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-
-        btnmodificarcontaseña.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnmodificarcontaseña.setText("Modificar");
-        btnmodificarcontaseña.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmodificarcontaseñaActionPerformed(evt);
-            }
-        });
+        jLabel23.setText("Contraseña:");
+        add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, -1, 24));
 
         btnmodificarnombre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnmodificarnombre.setText("Modificar");
@@ -96,12 +87,28 @@ public class DatosUsuario extends javax.swing.JPanel {
                 btnmodificarnombreActionPerformed(evt);
             }
         });
+        add(btnmodificarnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, -1, 38));
+
+        btnmodificarcontaseña.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnmodificarcontaseña.setText("Modificar");
+        btnmodificarcontaseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmodificarcontaseñaActionPerformed(evt);
+            }
+        });
+        add(btnmodificarcontaseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, -1, 38));
+
+        lblpassword.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblpassword.setText("Contraseña");
+        add(lblpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 95, 32));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel24.setText("Edad");
+        jLabel24.setText("Edad:");
+        add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 58, 24));
 
-        lblpassword.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblpassword.setText("Contraseña");
+        lblusuario.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblusuario.setText("Usuario");
+        add(lblusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 74, -1));
 
         btnmodificaredad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnmodificaredad.setText("Modificar");
@@ -110,12 +117,15 @@ public class DatosUsuario extends javax.swing.JPanel {
                 btnmodificaredadActionPerformed(evt);
             }
         });
+        add(btnmodificaredad, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, -1, 38));
 
-        lblusuario.setText("usuario");
-
+        lblnombre.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblnombre.setText("Nombre");
+        add(lblnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 74, -1));
 
-        lblapellido.setText("apellido");
+        lblapellido.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblapellido.setText("Apellido");
+        add(lblapellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, 74, -1));
 
         btnmodificarapellido.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnmodificarapellido.setText("Modificar");
@@ -124,81 +134,10 @@ public class DatosUsuario extends javax.swing.JPanel {
                 btnmodificarapellidoActionPerformed(evt);
             }
         });
+        add(btnmodificarapellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, -1, 38));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel23)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbledad)
-                                    .addComponent(lblusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblapellido, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnmodificarnombre)
-                            .addComponent(btnmodificaredad)
-                            .addComponent(btnmodificarcontaseña)
-                            .addComponent(btnmodificarapellido)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(105, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel1)
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblusuario))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblnombre)
-                    .addComponent(btnmodificarnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblapellido)
-                    .addComponent(btnmodificarapellido, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbledad)
-                    .addComponent(btnmodificaredad, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnmodificarcontaseña, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/FondoPerfil.jpeg"))); // NOI18N
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 490));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnmodificarcontaseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarcontaseñaActionPerformed
@@ -253,51 +192,6 @@ public class DatosUsuario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnmodificaredadActionPerformed
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        int op=0;
-        do{
-            op=JOptionPane.showConfirmDialog(null, "seguro desea eliminar su cuenta ");
-            System.out.println(op);
-            
-            try {
-            String sql="DELETE FROM `persona` WHERE usuario='"+lblusuario.getText()+"'";
-            PreparedStatement ab=conecta.getCon().prepareStatement(sql);
-            ab.executeUpdate();
-                
-//            ResultSet rs=conecta.query(sql);
-//            rs.next();
-//            if(rs.next()==true){
-                JOptionPane.showMessageDialog(null, "El usuario ha sido eliminado");
-//            }
-                Traductor t1=new Traductor();
-                InicioUsuario in=new InicioUsuario();
-                t1.setVisible(true);
-                in.dispose();
-       } catch (SQLException ex) {
-            Logger.getLogger(DatosUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }while(op!=0);
-        
-//        String codigo="DELETE FROM `persona` WHERE usuario='"+lblusuario.getText()+"'";
-//        
-//            ResultSet rsc;
-//            ConsultasSQL con = new ConsultasSQL(conecta.getCon(), codigo);
-//            
-//            if(con.getError()==null){
-//                rsc=con.getResultado();
-//                try {
-//                    rsc.next();
-//                    
-//                   rsc.close();
-//                    
-//                } catch (SQLException ex) {
-//                    ex.getMessage();
-////                    lblTraduccion.setText(txtPalabraIngreso.getText());
-//                }
-//            } 
-        
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
     private void btnmodificarapellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarapellidoActionPerformed
        Usuario usuario=new Usuario();
         try {
@@ -317,12 +211,12 @@ public class DatosUsuario extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnmodificarapellido;
     private javax.swing.JButton btnmodificarcontaseña;
     private javax.swing.JButton btnmodificaredad;
     private javax.swing.JButton btnmodificarnombre;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -334,4 +228,7 @@ public class DatosUsuario extends javax.swing.JPanel {
     public javax.swing.JLabel lblpassword;
     public javax.swing.JLabel lblusuario;
     // End of variables declaration//GEN-END:variables
+
+
+
 }

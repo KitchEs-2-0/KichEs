@@ -50,7 +50,7 @@ public class Preguntas extends JFrame{
         initComponents();
         this.setLocationRelativeTo(null);
         btnsiguinete.setEnabled(false);
-        this.setTitle("YUPAYKUNA--LOS NUMEROS");
+        this.setTitle("YUPAYKUNA--LOS NÚMEROS");
         for (int i = 1; i <11; i++) {
             imagen1[i]=new ImageIcon(getClass().getResource("/ImagenesJuegoN1/Numero"+i+".png")); 
         }
@@ -299,26 +299,17 @@ public class Preguntas extends JFrame{
 
     private void btnsiguineteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsiguineteActionPerformed
         validaRadios();
+        buttonGroup1.clearSelection();
     }//GEN-LAST:event_btnsiguineteActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         siguiente();
         habilitarboton();
-//        String a=lblp1.getText();
-//        System.out.println(a);
-//       if(a.equals(radio1.getText()) || a.equals(radio2.getText()) || a.equals(radio3.getText())|| a.equals("")){
-//           btnIniciar.enable(true);
         
-//       }
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void radio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio1ActionPerformed
-//        int contador=1; 
-//        int sum =0;
-//        contador++;
-//        sum= sum+contador;
-//        System.out.println("contador"+sum);
-//          Acumulador();
+
     }//GEN-LAST:event_radio1ActionPerformed
 
     private void btnsiguineteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsiguineteMouseClicked
@@ -326,7 +317,7 @@ public class Preguntas extends JFrame{
     }//GEN-LAST:event_btnsiguineteMouseClicked
 
     private void lblp1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblp1KeyReleased
-        habilitarboton();
+//        habilitarboton();
     }//GEN-LAST:event_lblp1KeyReleased
               
 //    public  AudioClip audio(int a){
@@ -400,7 +391,6 @@ public class Preguntas extends JFrame{
         int numero;
         numero=(rd.nextInt(10)+1); 
         
-//        System.out.println(numero);
         
         String sql="SELECT preguntas.pregunta, preguntas.Respuesta,imagen.imagen FROM preguntas, imagen WHERE preguntas.codPregunta LIKE '"+numero+"';";
         ResultSet rs;
@@ -516,8 +506,7 @@ public class Preguntas extends JFrame{
                 int incorrect=Integer.parseInt(lblincorrecto.getText());
                 int cont1=incorrect+1;
                 lblincorrecto.setText(String.valueOf(cont1));
-            
-//         limpiarradio();
+
         }
          
         siguiente();
@@ -543,7 +532,6 @@ public class Preguntas extends JFrame{
             num=(u.nextInt(3)+1);
         }
       
-//        System.out.println(n+" "+nu+" "+num);
 
         Iterator<Integer> it = treeMap.keySet().iterator();
             while(it.hasNext()){
@@ -563,13 +551,6 @@ public class Preguntas extends JFrame{
         
         
     }
-    
-//    public void limpiarradio(){
-//        radio1.removeAll();
-//        radio2.removeAll();
-//        radio3.removeAll();
-//       
-//    }
     
     public void click(){
         int correcto=Integer.parseInt(lblcorrecto.getText());
