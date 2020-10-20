@@ -7,7 +7,7 @@ package Interfaz;
 
 import Consultas.ConsultasSQL;
 import Controlador.ConexionBADA;
-import Modelo.CRegistro;
+import Modelo.CPersona;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.sql.ResultSet;
@@ -187,10 +187,10 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     
-    CRegistro login=new CRegistro();
+    CPersona login=new CPersona();
         public void ValidarCredenciales(){
             login.setUsuario(txtUsuario.getText());
-            login.setPassword(String.valueOf(txtpassword.getPassword()));
+            login.setContraseña(String.valueOf(txtpassword.getPassword()));
             if(consultar()==true){
                
 //                usuario();
@@ -207,7 +207,7 @@ public class LogIn extends javax.swing.JFrame {
     public boolean consultar() {
         try {
             ConexionBADA conecta=new ConexionBADA();
-            String sql="SELECT usuario,password FROM persona WHERE usuario ='"+login.getUsuario()+"' AND password=('"+login.getPassword()+"')";
+            String sql="SELECT usuario,password FROM persona WHERE usuario ='"+login.getUsuario()+"' AND password=('"+login.getContraseña()+"')";
             ResultSet rs=conecta.query(sql);
             if(rs.next()==true){      
                 return true;

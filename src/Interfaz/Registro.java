@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interfaz;
 
 import Controlador.ConexionBADA;
@@ -18,10 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-/**
- *
- * @author ASUS
- */
+
 public class Registro extends javax.swing.JFrame {
     ConexionBADA conecta=new ConexionBADA();
     CPersona persona=new CPersona();

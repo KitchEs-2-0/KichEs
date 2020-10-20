@@ -106,7 +106,6 @@ public class Preguntas extends JFrame{
         radio3 = new javax.swing.JRadioButton();
         btnIniciar = new javax.swing.JButton();
         lblImagenSalida = new javax.swing.JLabel();
-        lblp1 = new javax.swing.JLabel();
         lblp2 = new javax.swing.JLabel();
         lblp3 = new javax.swing.JLabel();
         lblusuario = new javax.swing.JLabel();
@@ -114,8 +113,9 @@ public class Preguntas extends JFrame{
         lblincorrecto = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        signo1 = new javax.swing.JButton();
+        signo2 = new javax.swing.JButton();
+        lblp1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(204, 255, 255));
@@ -160,12 +160,6 @@ public class Preguntas extends JFrame{
             }
         });
 
-        lblp1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                lblp1KeyReleased(evt);
-            }
-        });
-
         lblp2.setForeground(new java.awt.Color(255, 255, 255));
 
         lblp3.setForeground(new java.awt.Color(255, 255, 255));
@@ -186,9 +180,16 @@ public class Preguntas extends JFrame{
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Incorrectas");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/q1.png"))); // NOI18N
+        signo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/q1.png"))); // NOI18N
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/q2.png"))); // NOI18N
+        signo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/q2.png"))); // NOI18N
+
+        lblp1.setForeground(new java.awt.Color(255, 255, 255));
+        lblp1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                lblp1KeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -234,11 +235,11 @@ public class Preguntas extends JFrame{
                                 .addComponent(btnsiguinete, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(163, 163, 163)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(signo1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lblPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(signo2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -260,8 +261,8 @@ public class Preguntas extends JFrame{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblPreguntas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(signo1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(signo2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -367,8 +368,6 @@ public class Preguntas extends JFrame{
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnsiguinete;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -383,6 +382,8 @@ public class Preguntas extends JFrame{
     public static javax.swing.JRadioButton radio1;
     public static javax.swing.JRadioButton radio2;
     public static javax.swing.JRadioButton radio3;
+    private javax.swing.JButton signo1;
+    private javax.swing.JButton signo2;
     // End of variables declaration//GEN-END:variables
 
     
@@ -590,6 +591,5 @@ public class Preguntas extends JFrame{
         audio=java.applet.Applet.newAudioClip(getClass().getResource("/AudiosJuego/"+numero+".wav")) ;
         audio.play();
    }
-   
    
 }
