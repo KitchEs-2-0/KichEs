@@ -377,7 +377,7 @@ public class InicioUsuario extends javax.swing.JFrame {
     }
   
     public void eliminar(){
-         int p=JOptionPane.showConfirmDialog(null, "seguro desea eliminar su cuenta ");
+         int p=JOptionPane.showConfirmDialog(null, "¿Si elimina su cuenta perderá todo su progreso en el juego ¿Seguro desea eliminar su cuenta?");
         
         if (p==0) {
             try {
